@@ -1,0 +1,39 @@
+
+<% layout('layouts/boilerplate') %> 
+
+    <div class="row">
+        <h1 class="text-conter">Edit Place</h1>
+        <div class="col-6 offset-3">
+            <form action="/5starplaces/<%= placeground._id %>?_method=PUT" method="POST" novalidate class="validated-form">
+              <div class="mb-3">
+                  <label class="form-label" for="title">Title</label>
+                  <input class="form-control" type="text" id="title" name="placeground[title] " value="<%= placeground.title %>" required>
+              </div>
+              <div class="mb-3">
+                  <label class="form-label" for="location">Location</label>
+                  <input class="form-control" type="text" id="location" name="placeground[location]" value="<%=placeground.location %>" required>
+              </div>
+              <div class="mb-3">
+                  <label class="form-label" for="image">Image Url</label>
+                  <input class="form-control" type="text" id="location" name="placeground[image]" value="<%=placeground.image %>" required>
+              </div>
+               <div class="mb-3">
+                  <label class="form-label" for="price">Place price</label>
+                  <div class="input-group ">
+                      <span class="input-group-text" id="price-label">$</span>
+                      <input type="text" class="form-control" id="price" placeholder="0.00" aria-label="price" value="<%=placeground.price %>" aria-describedby="price-label" name="placeground[price]" required>
+                  </div>
+               </div>
+              <div class="mb-3">
+                  <label class="form-label" for="description">Description</label>
+                  <textarea class="form-control" type="text" id="location" name="placeground[description]" required ><%=   placeground.description %> </textarea>
+              </div>
+  
+                 <div class="mb-3">
+                  <button class="btn btn-info">Update Place</button>
+                 </div>
+                 <a href="/5starplaces/<%= placeground._id %> ">Back To Placeground</a>
+          </form>
+        </div>
+     </div>
+  
