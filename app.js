@@ -2,11 +2,12 @@ const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
 const ejsMate = require('ejs-mate');
-const { placegroundSchema } = require('./schemas.js');
+const { placegroundSchema, reviewSchema } = require('./schemas.js');
 const catchAsync = require('./utils/catchAsync');
 const ExpressError = require('./utils/ExpressError');
 const methodOverride = require('method-override');
 const Placeground = require('./models/placeground');
+const Review = require ('./models/review');
 
 mongoose.set('strictQuery', true); 
 mongoose.connect('mongodb://localhost:27017/yemen-review', {
@@ -43,6 +44,17 @@ const validatePlaceground = (req, res, next) => {
     
 }
 
+
+const validateReview = (req, res, next) => {
+    const { error } = reviewSchema.validate(req.body);
+    if(error) {
+        const msg = error.details.map(el => el.message).join(',')
+        throw new ExpressError(msg, 400)
+    } else {
+        next();
+    }
+}
+
 app.get('/', (req, res) => {
     //res.send('Hello form Yemen Reviews ');
      res.render('home')
@@ -70,7 +82,8 @@ app.post('/5starplaces', validatePlaceground, catchAsync(async(req, res, next) =
 
 
 app.get('/5starplaces/:id',catchAsync(async(req, res) => {
-    const placeground = await Placeground.findById(req.params.id);
+    const placeground = await Placeground.findById(req.params.id).populate('reviews');
+    //console.log(placeground)
     res.render('5starplaces/show', { placeground });
 }));
 
@@ -91,6 +104,24 @@ app.delete('/5starplaces/:id', catchAsync( async(req, res) => {
     await Placeground.findByIdAndDelete(id);
     res.redirect('/5starplaces');
 }));
+
+app.post('/5starplaces/:id/reviews', validateReview, catchAsync(async (req, res) => {
+   // res.send('YOU MADE IT!!!!');
+    const placeground = await Placeground.findById(req.params.id);
+    const review = new Review(req.body.review);
+    placeground.reviews.push(review);
+    await review.save();
+    await placeground.save();
+    res.redirect(`/5starplaces/${placeground._id}`);
+}));
+
+app.delete('/5starplaces/:id/reviews/:reviewId', catchAsync(async (req, res) =>{
+    const {id, reviewId} = req.params;
+    await Placeground.findByIdAndUpdate(id, { $pull: { reviews: reviewId }});
+    await Review.findByIdAndDelete(reviewId)
+    res.redirect(`/5starplaces/${id}`);
+    //res.send("Delete me")
+}))
 
 app.all('*', (req, res, next) => {
     // res.send("404!!!!!!!");
