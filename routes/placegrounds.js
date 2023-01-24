@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const catchAsync = require('../utils/catchAsync');
 const { placegroundSchema } = require('../schemas.js');
-
+const {isLoggedIn} = require('../middlewre');
 
 const ExpressError = require('../utils/ExpressError');
 const Placeground = require('../models/placeground');
@@ -27,12 +27,13 @@ router.get('/', catchAsync(async(req, res) => {
 }));
 
 
-router.get('/new', (req, res) => {
+router.get('/new', isLoggedIn, (req, res) => {
+  
    
     res.render('5starplaces/new');
 });
 
-router.post('/', validatePlaceground, catchAsync(async(req, res, next) => {
+router.post('/', isLoggedIn, validatePlaceground, catchAsync(async(req, res, next) => {
       //  if(!req.body.placeground) throw new ExpressError('Invalid places Data', 400)
         const placeground = new Placeground(req.body.placeground);
         await placeground.save();
@@ -43,7 +44,7 @@ router.post('/', validatePlaceground, catchAsync(async(req, res, next) => {
 }));
 
 
-router.get('/:id',catchAsync(async(req, res) => {
+router.get('/:id', catchAsync(async(req, res) => {
     const placeground = await Placeground.findById(req.params.id).populate('reviews');
     //console.log(placeground)
     if(!placeground){
@@ -53,7 +54,7 @@ router.get('/:id',catchAsync(async(req, res) => {
     res.render('5starplaces/show', { placeground });
 }));
 
-router.get('/:id/edit', catchAsync(async(req, res) => {
+router.get('/:id/edit', isLoggedIn, catchAsync(async(req, res) => {
     const placeground = await Placeground.findById(req.params.id);
     if(!placeground){
         req.flash('error', 'Cannot find that place :(');
@@ -62,7 +63,7 @@ router.get('/:id/edit', catchAsync(async(req, res) => {
     res.render('5starplaces/edit', { placeground });
 }));
 
-router.put('/:id', validatePlaceground, catchAsync(async (req, res) => {
+router.put('/:id', isLoggedIn, validatePlaceground, catchAsync(async (req, res) => {
     // res.send("IT WOEKED!!!")
     const { id } = req.params;
     const placeground = await Placeground.findByIdAndUpdate(id, { ...req.body.placeground });
@@ -76,5 +77,11 @@ router.delete('/:id', catchAsync( async(req, res) => {
     req.flash('success', 'Successfully deleted place :)');
     res.redirect('/5starplaces');
 }));
+
+router.get('/logout', (req, res) => {
+    req.logout();
+    req.flash('success', 'Goodbye :(')
+    res.redirect('/5starplaces');
+})
 
 module.exports = router;
