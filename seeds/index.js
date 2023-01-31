@@ -25,6 +25,7 @@ const seedDB = async () => {
         const random1000 = Math.floor(Math.random() * 5);
         const price = Math.floor(Math.random() * 2) + 1;
         const place = new Placeground({
+            author: "63d58efe6e596f1c5c22c5f9",
             location: `${cities[random1000].city}, ${cities[random1000].admin_name}`,
             title: `${sample(descriptors)} ${sample(places)}`,
             image: 'https://source.unsplash.com/483251', 
