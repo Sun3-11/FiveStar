@@ -1,4 +1,5 @@
 const Placeground = require('../models/placeground');
+const { cloudinary } = require("../cloudinary");
 
 module.exports.index = async(req, res) => {
     const fivestarplaces = await Placeground.find({});
@@ -12,8 +13,10 @@ module.exports.renderNewForm =  (req, res) => {
 module.exports.createPlaceground =async(req, res, next) => {
     //  if(!req.body.placeground) throw new ExpressError('Invalid places Data', 400)
       const placeground = new Placeground(req.body.placeground);
+      placeground.image = req.files.map(f => ({ url: f.path, filename: f.filename }));
       placeground.author = req.user._id;
       await placeground.save();
+      console.log(placeground.image)
       req.flash('success', 'Successfully made a new 5star place')
 
       res.redirect(`/5starplaces/${placeground._id}`);
@@ -50,6 +53,15 @@ module.exports.updatePlaceground = async (req, res) => {
     // res.send("IT WOEKED!!!")
     const { id } = req.params;
     const placeground = await Placeground.findByIdAndUpdate(id, { ...req.body.placeground });
+    const imgs = req.files.map(f => ({ url: f.path, filename: f.filename }));
+    placeground.image.push(...imgs);
+    await placeground.save();
+    if (req.body.deleteImages) {
+        for (let filename of req.body.deleteImages) {
+            await cloudinary.uploader.destroy(filename);
+        }
+        await placeground.updateOne({ $pull: { image: { filename: { $in: req.body.deleteImages } } } })
+    }
     req.flash('success', 'Successfully updated :)');
     res.redirect(`/5starplaces/${placeground._id}`);
 }
