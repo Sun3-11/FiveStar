@@ -1,4 +1,8 @@
 const Placeground = require('../models/placeground');
+const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
+const mapBoxToken = process.env.MAPBOX_TOKEN;
+const geocoder = mbxGeocoding({accessToken: mapBoxToken});
+
 const { cloudinary } = require("../cloudinary");
 
 module.exports.index = async(req, res) => {
@@ -12,13 +16,19 @@ module.exports.renderNewForm =  (req, res) => {
 
 module.exports.createPlaceground =async(req, res, next) => {
     //  if(!req.body.placeground) throw new ExpressError('Invalid places Data', 400)
+     const geoData = await geocoder.forwardGeocode({
+         query: req.body.placeground.location,
+         limit: 1
+      }).send() 
+     
+      //res.send('Ok!')
       const placeground = new Placeground(req.body.placeground);
+      placeground.geometry= geoData.body.features[0].geometry;
       placeground.image = req.files.map(f => ({ url: f.path, filename: f.filename }));
       placeground.author = req.user._id;
       await placeground.save();
-      console.log(placeground.image)
+      console.log(placeground)
       req.flash('success', 'Successfully made a new 5star place')
-
       res.redirect(`/5starplaces/${placeground._id}`);
  
 }

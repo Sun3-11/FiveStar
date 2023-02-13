@@ -15,9 +15,22 @@ ImageSchema.virtual('thumbnail').get(function () {
     return this.url.replace('/upload', '/upload/w_200');
 });
 
+const opts = { toJSON: { virtuals: true } };
+
 const PlacegroundSchema = new Schema({
     title: String,
     image:[ImageSchema],
+    geometry: {
+        type: {
+            type: String,
+            enum: ['Point'],
+            required: true,
+        },
+        coordinates: {
+            type: [Number],
+            required: true
+        }    
+    },
     price: Number, 
     description: String,
     location: String,
@@ -30,7 +43,14 @@ const PlacegroundSchema = new Schema({
             type: Schema.Types.ObjectId,
             ref: 'Review'
         }
-    ]
+    ],
+    
+}, opts);
+
+PlacegroundSchema.virtual('properties.popUpMarkup').get(function () {
+    return `
+    <strong><a href="/5starplaces/${this._id}">${this.title}</a><strong>
+    <p>${this.description.substring(0, 20)}...</p>`
 });
 
 PlacegroundSchema.post('findOneAndDelete', async function(doc) {

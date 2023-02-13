@@ -1,29 +1,50 @@
+<% layout('layouts/boilerplate') %>
+    <div id="cluster-map" ></div>
 
-
-<% layout('layouts/boilerplate') %> 
     <h1>All Places</h1>
     <div>
         <a href="/5starplaces/new">Add place Ground</a>
     </div>
     <ul>
-      <% for(let placeground of fivestarplaces){ %>
-           <div class="card" mb-3>
-             <div class="row">
-                <div class="col-md-4">
-                     <img class="img-fluid" alt="" src="<%= placeground.image[0].url %> ">
-                </div>
-                <div class="col-md-8"> 
-                    <div class="card-body">
-                        <h5 class="card-title"> <%= placeground.title %> </h5>
-                        <p class="card-text"> <%= placeground.description %> </p>
-                        <p class="card-text"> 
-                            <small class="text-muted"> <%= placeground.location %>  </small>
-                        </p>
-                        <a href="/5starplaces/<%=placeground._id%> " class="btn btn-primary">view <%=  placeground.title %></a>
+        <% for(let placeground of fivestarplaces){ %>
+            <div class="card" mb-3>
+                <div class="row">
+                    <div class="col-md-4">
+                        <% if(placeground.image.length) {%>
+                            <img crossorigin="anonymous" class="img-fluid" alt="" src="<%= placeground.image[0].url %> ">
+                            <% } else {%>
+                                <img crossorigin="anonymous" class="img-fluid" alt="" src="https://res.cloudinary.com/db8dzgriv/image/upload/v1675821541/yemenReviews/tz69nj2jsgxvqekjaqub.jpg" >
+
+                                <% } %>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <%= placeground.title %>
+                            </h5>
+                            
+                            <p class="card-text">
+                                <%= placeground.description %>
+                            </p>
+                            <p class="card-text">
+                                <small class="text-muted">
+                                    <%= placeground.location %>
+                                </small>
+                            </p>
+                            <a href="/5starplaces/<%=placeground._id%> " class="btn btn-primary">view <%=
+                                    placeground.title %></a>
+                        </div>
                     </div>
                 </div>
-             </div>
-           </div>  
-      <% } %>  
+            </div>
+            <% } %>
 
     </ul>
+
+<script>
+    const mapTokens = '<%-process.env.MAPBOX_TOKEN%>';
+    const placegrounds = { features: <%- JSON.stringify(fivestarplaces) %>}
+</script>
+    
+
+    <script src="/js/clusterMap.js"></script>
