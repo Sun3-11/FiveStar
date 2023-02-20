@@ -47,6 +47,20 @@
                     </div>
                 </div>
              </div>
+
+                <div class="mb-3">
+                 
+                   <div class="input-group ">
+                    <label class="form-label" for="typeplace">Select:</label>
+                    <select  class="form-select" aria-label="Default select example" name="placeground[typeplace]" id="typeplace">
+                      <% for (let typeplacee of typeplacees) { %>
+                      <option  value="<%= typeplacee %>"><%=typeplacee %> </option>
+                    <% } %> 
+                   
+                 </div>
+            </select>
+            </div>
+
             <div class="mb-3">
                 <label class="form-label" for="description">Description</label>
                 <textarea class="form-control" type="text" id="location" name="placeground[description]" required></textarea>

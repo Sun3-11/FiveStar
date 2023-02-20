@@ -7,11 +7,16 @@ const { cloudinary } = require("../cloudinary");
 
 module.exports.index = async(req, res) => {
     const fivestarplaces = await Placeground.find({});
-    res.render('5starplaces/index', {fivestarplaces})
+   
+    res.render('5starplaces/index', {fivestarplaces,typeplacees })
 }
 
-module.exports.renderNewForm =  (req, res) => { 
-    res.render('5starplaces/new');
+const typeplacees = ['fruit', 'vegetable', 'dairy'];
+
+
+module.exports.renderNewForm = async (req, res) => { 
+ 
+    res.render('5starplaces/new', { typeplacees});
 }
 
 module.exports.createPlaceground =async(req, res, next) => {
@@ -30,8 +35,9 @@ module.exports.createPlaceground =async(req, res, next) => {
       console.log(placeground)
       req.flash('success', 'Successfully made a new 5star place')
       res.redirect(`/5starplaces/${placeground._id}`);
- 
+      
 }
+
 
 module.exports.showPlaceground = async(req, res) => {
     const placeground = await Placeground.findById(req.params.id).populate({
@@ -46,7 +52,7 @@ module.exports.showPlaceground = async(req, res) => {
         req.flash('error', 'Cannot find that place :(');
        return res.redirect('/5starplaces');
     }
-    res.render('5starplaces/show', { placeground });
+    res.render('5starplaces/show', { placeground, typeplacees });
 }
 
 module.exports.renderEditForm = async(req, res) => {
@@ -56,7 +62,7 @@ module.exports.renderEditForm = async(req, res) => {
         req.flash('error', 'Cannot find that place :(');
        return res.redirect('/5starplaces');
     }
-    res.render('5starplaces/edit', { placeground });
+    res.render('5starplaces/edit', { placeground, typeplacees });
 }
 
 module.exports.updatePlaceground = async (req, res) => {

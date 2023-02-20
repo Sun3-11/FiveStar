@@ -19,6 +19,7 @@ const opts = { toJSON: { virtuals: true } };
 
 const PlacegroundSchema = new Schema({
     title: String,
+   
     image:[ImageSchema],
     geometry: {
         type: {
@@ -32,6 +33,13 @@ const PlacegroundSchema = new Schema({
         }    
     },
     price: Number, 
+    typeplace: {
+        
+        type: String,
+       // required: true,
+        lowercase: true,
+        enum: ['fruit', 'vegetable', 'dairy']
+    },
     description: String,
     location: String,
     author: {

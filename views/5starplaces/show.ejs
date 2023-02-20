@@ -39,7 +39,8 @@
             <ul class="list-group list-group-flush">
             <li class="list-group-item text-muted"><%= placeground.location %></li>
             <li class="list-group-item ">Submitted by <%= placeground.author.username %></li>
-            <li class="list-group-item">$<%= placeground.price %>/night</li>
+
+           <li>Type: <a href="/5starplaces?typeplace=<%= placeground.typeplace %>"><%= placeground.typeplace %></a> </li>            <li class="list-group-item">$<%= placeground.price %>/night</li>
             </ul>
             <% if( currentUser && placeground.author.equals(currentUser._id)) { %> 
             <div class="card-body">
