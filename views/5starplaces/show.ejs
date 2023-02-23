@@ -40,8 +40,10 @@
             <li class="list-group-item text-muted"><%= placeground.location %></li>
             <li class="list-group-item ">Submitted by <%= placeground.author.username %></li>
 
-           <li>Type: <a href="/5starplaces?typeplace=<%= placeground.typeplace %>"><%= placeground.typeplace %></a> </li>            <li class="list-group-item">$<%= placeground.price %>/night</li>
+           <li>Type: <a href="/5starplaces?typeplace=<%= placeground.typeplace %>"><%= placeground.typeplace %></a> </li>    
             </ul>
+          <li class="list-group-item">$<%= placeground.price %>/night</li><li>Type: <a href="/5starplaces?duration=<%= placeground.duration %>"><%= placeground.duration %></a> </li>
+
             <% if( currentUser && placeground.author.equals(currentUser._id)) { %> 
             <div class="card-body">
                 <a class="card-link btn btn-warning" href="/5starplaces/<%= placeground._id %>/edit ">Edit</a>

@@ -40,6 +40,13 @@ const PlacegroundSchema = new Schema({
         lowercase: true,
         enum: ['fruit', 'vegetable', 'dairy']
     },
+   duration: {
+        
+        type: String,
+       // required: true,
+        lowercase: true,
+        enum: ['24', '12', 'day', 'month', 'year']
+    },
     description: String,
     location: String,
     author: {

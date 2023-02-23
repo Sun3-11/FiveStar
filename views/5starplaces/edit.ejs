@@ -21,7 +21,15 @@
                       <input type="text" class="form-control" id="price" placeholder="0.00" aria-label="price" value="<%=placeground.price %>" aria-describedby="price-label" name="placeground[price]" required>
                   </div>
                </div>
-
+            <div class="col-md-4">
+                    <label for="duration" class="form-label">State</label>
+                    <select id="inputState"class="form-select" aria-label="Default select example" name="placeground[duration]">
+                    <!-- <option selected>Choose...</option> -->
+                    <% for (let durationes of duration) { %>
+                    <option  value="<%= durationes %>"  <%= placeground.durationes === durationes ? 'selected' : '' %>><%=durationes %> </option>                    <% } %> 
+                   
+                </select>
+            </div>
                 <div class="mb-3">
                                     
                    <div class="input-group ">

@@ -29,6 +29,7 @@ module.exports.placegroundSchema = Joi.object({
         price: Joi.number().required().min(0),
         //image: Joi.string().required(),
         typeplace: Joi.string().required().escapeHTML(),
+        duration: Joi.string().required().escapeHTML(),
         location: Joi.string().required().escapeHTML(),
         description: Joi.string().required().escapeHTML()
 

@@ -48,6 +48,17 @@
                 </div>
              </div>
 
+         <div class="col-md-4">
+                <label for="duration" class="form-label">State</label>
+                <select id="inputState" class="form-select" name="placeground[duration]">
+                <option selected>Choose...</option>
+                 <% for (let durationes of duration) { %>
+                      <option  value="<%= durationes %>"><%=durationes %> </option>
+                    <% } %> 
+                   
+                </select>
+            </div>
+
                 <div class="mb-3">
                  
                    <div class="input-group ">
@@ -85,4 +96,3 @@
         </form>
       </div>
    </div>
-

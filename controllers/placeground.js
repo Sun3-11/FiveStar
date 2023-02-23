@@ -12,11 +12,12 @@ module.exports.index = async(req, res) => {
 }
 
 const typeplacees = ['fruit', 'vegetable', 'dairy'];
+const duration = ['24', '12', 'day', 'month', 'year'];
 
 
 module.exports.renderNewForm = async (req, res) => { 
  
-    res.render('5starplaces/new', { typeplacees});
+    res.render('5starplaces/new', { typeplacees, duration});
 }
 
 module.exports.createPlaceground =async(req, res, next) => {
@@ -52,7 +53,7 @@ module.exports.showPlaceground = async(req, res) => {
         req.flash('error', 'Cannot find that place :(');
        return res.redirect('/5starplaces');
     }
-    res.render('5starplaces/show', { placeground, typeplacees });
+    res.render('5starplaces/show', { placeground, typeplacees, duration });
 }
 
 module.exports.renderEditForm = async(req, res) => {
@@ -62,7 +63,7 @@ module.exports.renderEditForm = async(req, res) => {
         req.flash('error', 'Cannot find that place :(');
        return res.redirect('/5starplaces');
     }
-    res.render('5starplaces/edit', { placeground, typeplacees });
+    res.render('5starplaces/edit', { placeground, typeplacees, duration });
 }
 
 module.exports.updatePlaceground = async (req, res) => {
