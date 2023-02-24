@@ -38,7 +38,7 @@
             </div>
             <ul class="list-group list-group-flush">
             <li class="list-group-item text-muted"><%= placeground.location %></li>
-            <li class="list-group-item ">Submitted by <%= placeground.author.username %></li>
+            <li class="list-group-item ">Submitted by <%= placeground.author.username %>, -<%= moment(placeground.createdAt).fromNow() %></li>
 
            <li>Type: <a href="/5starplaces?typeplace=<%= placeground.typeplace %>"><%= placeground.typeplace %></a> </li>    
             </ul>
@@ -53,7 +53,11 @@
             </div>
             <% } %> 
             <div class="card-footer text-muted">
-                2 days ago
+             <div class="card-footer text-muted fs-6 fw-light">Created at:
+                            <%= 
+                              //  placeground.updatedAt.humanized_time_span()//toLocaleString('ar-GB')//toLocaleString('en-GB', { timeZone: 'UTC' })//.toISOString().slice(0, 10); 
+                           %> </div>
+
                 <a href="/5starplaces">All Place</a>
             </div>
         </div>
@@ -98,7 +102,7 @@
  
                <div class="card-body">
                    
-                   <h5 class="card-title"> <%= review.author.username%></h5>
+                   <h5 class="card-title"> <%= review.author.username%>, - <%= moment(review.createdAt).fromNow() %> </h5>
                        
                         <p class="starability-result" data-rating="<%= review.rating %>">
                             Rated: <%= review.rating %>stars
@@ -117,7 +121,7 @@
     </div>
 </div>
 
-<script>
+<script>  
     const mapToken = '<%-process.env.MAPBOX_TOKEN%>';
     const placeground = <%-JSON.stringify(placeground)%>;
  </script>
