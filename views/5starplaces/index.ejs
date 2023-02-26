@@ -22,7 +22,23 @@
                             <h5 class="card-title">
                                 <%= placeground.title %>
                             </h5>
-                            
+                              <!-- Rating -->
+                            <div class="d-inline float-end fw-light">
+                            <img
+                                class="d-inline align-baseline fw-light"
+                                src="https://res.cloudinary.com/dbkdxsoia/image/upload/v1662231684/YelpCamp/star-svgrepo-com_gxflaa.svg"
+                                alt="star icon"
+                                width="12"
+                                height="12"
+                            />
+                            <!-- If no ratings display n/a  else display rating-->
+                            <% if (placeground.rating === 0){ %>
+                            <p class="d-inline">new</p>
+                            <% } else { %>
+                            <div class="d-inline fw-light"><%= placeground.rating %></div>
+                            <br />
+                            <% } %>
+                            </div>
                             <p class="card-text">
                                 <%= placeground.description %>
                             </p>

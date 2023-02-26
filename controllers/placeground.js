@@ -6,9 +6,53 @@ const geocoder = mbxGeocoding({accessToken: mapBoxToken});
 const { cloudinary } = require("../cloudinary");
 
 module.exports.index = async(req, res) => {
-    const fivestarplaces = await Placeground.find({});
-   
+  // const fivestarplaces = await Placeground.find({});
+    
+// if search
+  if (req.query.search) {
+    const regex = new RegExp(escapeRegex(req.query.search), "gi");
+    const fivestarplaces = await populatePlace(
+      Placeground.find({
+        $or: [{ title: regex }, { location: regex }],
+      })
+    );
+    if (fivestarplaces.length < 1) {
+      req.flash("error", "No campgrounds found, please try again.");
+      return res.redirect("/5starplaces");
+    }
+    res.render('5starplaces/index', { fivestarplaces });
+    // sorting highest rated
+  } else if (req.query.sortby === "higestRated") {
+    const fivestarplaces = await populatePlace(
+      Placeground.find({}).sort({ rating: -1 })
+    );
+    res.render('5starplaces/index', { fivestarplaces });
+    //sorting lowest price
+  } else if (req.query.sortby === "lowestPrice") {
+    const fivestarplaces = await populatePlace(
+      Placeground.find({}).sort({ price: 1 })
+    );
+    res.render('5starplaces/index', { fivestarplaces });
+    //sorting highest price
+  } else if (req.query.sortby === "highestPrice") {
+    const fivestarplaces = await populatePlace(
+      Placeground.find({}).sort({ price: -1 })
+    );
+    res.render('5starplaces/index', { fivestarplaces });
+    //clear sorting or no query
+  } else if (req.query.sortby === "clear" || !req.query.sortby) {
+    const fivestarplaces = await populatePlace(Placeground.find({}));
+    res.render('5starplaces/index', { fivestarplaces });
+    //find by tag
+  } else {
+    const fivestarplaces = await populatePlace(
+      Placeground.find({
+        tag: { $in: [req.query.sortby] },
+      })
+    );
     res.render('5starplaces/index', {fivestarplaces,typeplacees })
+}
+
 }
 
 const typeplacees = ['fruit', 'vegetable', 'dairy'];
@@ -88,4 +132,19 @@ module.exports.deletePlaceground = async(req, res) => {
     await Placeground.findByIdAndDelete(id);
     req.flash('success', 'Successfully deleted place :)');
     res.redirect('/5starplaces');
+}
+
+function escapeRegex(text) {
+  return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+}
+
+function populatePlace(placeground) {
+  return placeground
+    .populate({
+      path: "reviews",
+      populate: {
+        path: "author",
+      },
+    })
+    .populate("author");
 }

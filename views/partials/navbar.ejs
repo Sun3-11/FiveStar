@@ -22,5 +22,98 @@
           <% } %>
        </div>
       </div>
+   <!-- Search Bar -->
+      <div class="search-box mx-auto shadow-sm">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          fill="currentColor"
+          class="bi bi-search"
+          viewBox="0 0 16 16"
+        >
+          <path
+            d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"
+          />
+        </svg>
+        <form action="/5starplaces" method="GET" class="d-flex flex-grow-1">
+          <input
+            type="search"
+            name="search"
+            placeholder="type here..."
+            id="searchBar"
+            class="search-input form-control d-flex flex-grow-1"
+            data-search
+            autocomplete="off"
+          />
+
+          <input
+            type="submit"
+            value=""
+            class="btn btn-sm round-search-btn search-small"
+          />
+          <input
+            type="submit"
+            value="Search"
+            class="btn btn-sm round-search-btn search-large"
+          />
+        </form>
+      </div>
+
+<!--Filter Button -->
+      <div class="btnTagActive">
+        <button
+          class="justify-content-center align-items-center btn dropdown-toggle border-0"
+          type="button"
+          id="dropdownMenuButton1"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          <p class="d-inline me-1" style="color: aliceblue;">Filter</p>
+        
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+          <li class="dropdown-item px-0">
+            <form class="sortForm" action="/5starplaces" method="GET">
+              <input type="text" name="sortby" value="higestRated" class="d-none" />
+
+                <button type="submit" class="dropdown-item">
+                <p class="d-inline px-1">Highest Rated</p>
+              </button>
+            </form>
+          </li>
+          <li class="dropdown-item px-0">
+            <form class="sortForm" action="/5starplaces" method="GET">
+              <input
+                type="text"
+                name="sortby"
+                value="lowestPrice"
+                class="d-none"
+              />
+              <button type="submit" class="dropdown-item">
+               
+                <p class="d-inline px-1">Lowest Price</p>
+              </button>
+            </form>
+          </li>
+          <li class="dropdown-item px-0">
+            <form class="sortForm" action="/5starplaces" method="GET">
+              <input
+                type="text"
+                name="sortby"
+                value="highestPrice"
+                class="d-none"
+              />
+              <button type="submit" class="dropdown-item">
+              
+                <p class="d-inline px-1">Highest Price</p>
+              </button>
+            </form>
+          </li>
+          <li class="dropdown-item px-0"></li>
+        </ul>
+      </div>
+
+
     </div>
   </nav>

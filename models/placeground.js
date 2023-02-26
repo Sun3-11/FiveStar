@@ -60,7 +60,15 @@ const PlacegroundSchema = new Schema({
             ref: 'Review'
         }
     ],
-    
+    rating: {
+      type: Number,
+      default: 0,
+    },
+    winner: {
+      type: Boolean,
+      default: false,
+    },
+    tag: String,
 }, opts);
 
 PlacegroundSchema.virtual('properties.popUpMarkup').get(function () {

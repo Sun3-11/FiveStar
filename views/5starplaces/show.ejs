@@ -34,6 +34,27 @@
             <%// } %> 
             <div class="card-body">
             <h5 class="card-title"><%= placeground.title %></h5>
+     <!-- Rating -->
+        <div class="d-inline float-end">
+        <img
+          class="d-inline align-baseline"
+          src="https://res.cloudinary.com/dbkdxsoia/image/upload/v1662231684/YelpCamp/star-svgrepo-com_gxflaa.svg"
+          alt=""
+          width="12"
+          height="12"
+        />
+          <!-- If no ratings display new  else display rating-->
+          <% if (placeground.rating === 0){ %>
+          <p class="d-inline fs-6">new</p>
+          <% } else { %>
+          <div class="d-inline fs-6"><%= placeground.rating %></div>
+          <div class="d-inline text-muted fs-6 fw-light">&bull; <%= placeground.reviews.length %> reviews</div>
+
+          <br />
+          <% } %>
+          </div>
+
+
             <p class="card-text"><%= placeground.description %></p>
             </div>
             <ul class="list-group list-group-flush">
@@ -43,6 +64,7 @@
            <li>Type: <a href="/5starplaces?typeplace=<%= placeground.typeplace %>"><%= placeground.typeplace %></a> </li>    
             </ul>
           <li class="list-group-item">$<%= placeground.price %>/night</li><li>Type: <a href="/5starplaces?duration=<%= placeground.duration %>"><%= placeground.duration %></a> </li>
+    
 
             <% if( currentUser && placeground.author.equals(currentUser._id)) { %> 
             <div class="card-body">
