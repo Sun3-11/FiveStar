@@ -24,10 +24,10 @@ const userRoutes = require('./routes/user');
 const placegroundRouters = require('./routes/placegrounds');
 const reviewsRouter = require('./routes/reviews');
 
-const MongoStore = require("connect-mongo");
+const MongoStore = require("connect-mongo")(session);
 
-//const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/yemen-review';
-const dbUrl = 'mongodb://localhost:27017/yemen-review';
+const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/yemen-review';
+//const dbUrl = process.env.DB_URL //'mongodb://localhost:27017/yemen-review';
 
 
 //Mongoose DB connections
@@ -66,7 +66,7 @@ const secret = process.env.SECRET || 'thismybettersecret';
 
 const store = MongoStore.create({
     mongoUrl: dbUrl,
-    secret,
+    secret: 'thisshouldbeabttersecret!',
     touchAfter: 24 * 60 * 60
 });
 
@@ -77,7 +77,7 @@ store.on("error", function (e) {
 const sessionConfig = {
     store,
     name: 'session',
-    secret,
+    secret: 'thisshouldbeabttersecret!',
     resave: false,
     saveUninitialized: true,
     cookie: {
