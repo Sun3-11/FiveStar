@@ -24,7 +24,7 @@ const userRoutes = require('./routes/user');
 const placegroundRouters = require('./routes/placegrounds');
 const reviewsRouter = require('./routes/reviews');
 
-const MongoStore = require("connect-mongo")(session);
+const MongoStore = require("connect-mongo")//(session);
 
 const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/yemen-review';
 //const dbUrl = process.env.DB_URL //'mongodb://localhost:27017/yemen-review';
