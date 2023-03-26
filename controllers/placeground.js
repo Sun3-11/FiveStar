@@ -55,7 +55,7 @@ module.exports.index = async(req, res) => {
 
 }
 
-const typeplacees = ['fruit', 'vegetable', 'dairy'];
+const typeplacees = ['coffee', 'restaurant', 'park', 'another thing'];
 const duration = ['24', '12', 'day', 'month', 'year'];
 
 

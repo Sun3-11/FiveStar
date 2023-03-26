@@ -1,3 +1,7 @@
 
 <% layout('layouts/boilerplate') %> 
+<% if (currentUser && currentUser.isAdmin) {%>
+            <h1>You're an admin!</h1>
+         
+        <% } %>
     <h1>Home yemen Reviews </h1>

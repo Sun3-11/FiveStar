@@ -6,8 +6,8 @@ const Review = require('./models/review');
 // Placses middelwre
 module.exports.isLoggedIn = (req, res, next) => {
     //console.log("REQ>USER...", req.user)
-    if (!req.isAuthenticated()) {
-    req.session.returnTo = req.originalUrl
+    if (!req.isAuthenticated() || req.user.isAdmin) {
+    // req.session.returnTo = req.originalUrl
     req.flash('error', 'you must be signed in');
     return res.redirect('/login');
   

@@ -38,7 +38,7 @@ const PlacegroundSchema = new Schema({
         type: String,
        // required: true,
         lowercase: true,
-        enum: ['fruit', 'vegetable', 'dairy']
+        enum: ['coffee', 'restaurant', 'park', 'another thing']
     },
    duration: {
         

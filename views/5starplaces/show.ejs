@@ -1,145 +1,127 @@
 <% layout('layouts/boilerplate') %> 
 <link rel="stylesheet" href="/style/stars.css">
   
-
-
-<div class="row">
-    <div class="col-6 ">
-              
-       
-          <div id="placegroundCarousel" class="carousel slide" data-bs-ride="carousel" >
-            <div class="carousel-inner">
-                <% placeground.image.forEach((img, i) => {  %>
-                    <div class="carousel-item <%= i === 0 ? 'active' : ''%>">
-                        <img crossorigin="anonymous" src="<%= img.url%>" class="d-block w-100" alt="">
+<div class="container py-5">
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="card mb-3">
+                <!-- Carousel -->
+                <div id="placegroundCarousel" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <% placeground.image.forEach((img, i) => {  %>
+                            <div class="carousel-item <%= i === 0 ? 'active' : ''%>">
+                                <img crossorigin="anonymous" src="<%= img.url%>" class="d-block w-100" alt="">
+                            </div>
+                        <% }) %>
                     </div>
-                    <% }) %>
-            </div>
-            <% if(placeground.image.length > 1) {%>
-            <button class="carousel-control-prev" type="button" data-bs-target="#placegroundCarousel" data-bs-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#placegroundCarousel" data-bs-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Next</span>
-            </button>
-            <% } %>
-          </div>
-          
+                    
+                    <% if(placeground.image.length > 1) {%>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#placegroundCarousel" data-bs-slide="prev">
+                          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                          <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#placegroundCarousel" data-bs-slide="next">
+                          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                          <span class="visually-hidden">Next</span>
+                        </button>
+                    <% } %>
+                </div>
                 
-        <div class="card mb-3" >
-            <% //for(let img of placeground.image){ %>
-                <!-- <img src="<%= //img.url %> " class="card-img-top" alt="..."> -->
-            <%// } %> 
-            <div class="card-body">
-            <h5 class="card-title"><%= placeground.title %></h5>
-     <!-- Rating -->
-        <div class="d-inline float-end">
-        <img
-          class="d-inline align-baseline"
-          src="https://res.cloudinary.com/dbkdxsoia/image/upload/v1662231684/YelpCamp/star-svgrepo-com_gxflaa.svg"
-          alt=""
-          width="12"
-          height="12"
-        />
-          <!-- If no ratings display new  else display rating-->
-          <% if (placeground.rating === 0){ %>
-          <p class="d-inline fs-6">new</p>
-          <% } else { %>
-          <div class="d-inline fs-6"><%= placeground.rating %></div>
-          <div class="d-inline text-muted fs-6 fw-light">&bull; <%= placeground.reviews.length %> reviews</div>
-
-          <br />
-          <% } %>
-          </div>
-
-
-            <p class="card-text"><%= placeground.description %></p>
-            </div>
-            <ul class="list-group list-group-flush">
-            <li class="list-group-item text-muted"><%= placeground.location %></li>
-            <li class="list-group-item ">Submitted by <%= placeground.author.username %>, -<%= moment(placeground.createdAt).fromNow() %></li>
-
-           <li>Type: <a href="/5starplaces?typeplace=<%= placeground.typeplace %>"><%= placeground.typeplace %></a> </li>    
+                <!-- Card Body -->
+                <div class="card-body">
+                    <h5 class="card-title"><%= placeground.title %></h5>
+                    
+                    <!-- Rating -->
+                    <div class="text-end">
+                        <% if (placeground.rating === 0){ %>
+                            <p class="d-inline fs-6">new</p>
+                        <% } else { %>
+                            <div class="d-inline fs-6"><%= placeground.rating %></div>
+                            <div class="d-inline text-muted fs-6 fw-light">&bull; <%= placeground.reviews.length %> reviews</div>
+                            <br />
+                        <% } %>
+                        <img class="ms-2" src="https://res.cloudinary.com/dbkdxsoia/image/upload/v1662231684/YelpCamp/star-svgrepo-com_gxflaa.svg" alt="" width="12" height="12"/>
+                    </div>
+                    
+                    <p class="card-text"><%= placeground.description %></p>
+                </div>
+                
+                <!-- List Group -->
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Type: <a href="/5starplaces?typeplace=<%= placeground.typeplace %>"><%= placeground.typeplace %></a></li>    
+                    <li class="list-group-item">$<%= placeground.price %>/night</li>
+                    <li class="list-group-item">Duration: <a href="/5starplaces?duration=<%= placeground.duration %>"><%= placeground.duration %></a></li>
+                    <li class="list-group-item text-muted"><%= placeground.location %></li>
+                    <li-group-item">Submitted by <%= placeground.author.username %>, -<%= moment(placeground.createdAt).fromNow() %></li>
+                <% if( currentUser && placeground.author.equals(currentUser._id) || currentUser && currentUser.isAdmin) { %> 
+                    <div class="card-body">
+                        <a class="card-link btn btn-warning" href="/5starplaces/<%= placeground._id %>/edit ">Edit</a>
+                        <form class="d-inline" action="/5starplaces/<%= placeground._id%>?_method=DELETE" method="POST">
+                            <button class="btn btn-danger">Delete</button>
+                        </form>
+                    </div>
+                <% } %> 
             </ul>
-          <li class="list-group-item">$<%= placeground.price %>/night</li><li>Type: <a href="/5starplaces?duration=<%= placeground.duration %>"><%= placeground.duration %></a> </li>
-    
-
-            <% if( currentUser && placeground.author.equals(currentUser._id)) { %> 
-            <div class="card-body">
-                <a class="card-link btn btn-warning" href="/5starplaces/<%= placeground._id %>/edit ">Edit</a>
-                <form class="d-inline" action="/5starplaces/<%= placeground._id%>?_method=DELETE" method="POST">
-                    <button class="btn btn-danger">Delete</button>
-                    </form>
-            </div>
-            <% } %> 
+            
+            <!-- Card Footer -->
             <div class="card-footer text-muted">
-             <div class="card-footer text-muted fs-6 fw-light">Created at:
-                            <%= 
-                              //  placeground.updatedAt.humanized_time_span()//toLocaleString('ar-GB')//toLocaleString('en-GB', { timeZone: 'UTC' })//.toISOString().slice(0, 10); 
-                           %> </div>
-
+                <div class="card-footer text-muted fs-6 fw-light">Created at:
+                    <%= moment(placeground.updatedAt).format("YYYY/MM/DD, hh:mm A") %>
+                </div>
                 <a href="/5starplaces">All Place</a>
             </div>
         </div>
-      
     </div>
-    <div class="col-6">
-        <div class="mb-4" id='map' ></div>
-        <% if( currentUser ){ %> 
-        <h2 >Leave a Review</h2>
+
+    <div class="col-lg-6">
+        <div id='map' style="height: 400px"></div>
+        
+        <!-- Review Section -->
+        <% if (currentUser) { %>
+        <h2>Leave a Review</h2>
         <form action="/5starplaces/<%= placeground._id %>/reviews " method="POST" class="mb-3 validated-form" novalidate>
-           <!-- <div class="mb-3" >
-               <label class="form-label" for="rating">Rating</label>
-               <input class="form-range" type="range" min="1" max="5" name="review[rating]" id="rating">
-           </div> -->
-           <div class="mb-3">
-           <fieldset class="starability-growRotate">
-               
-                <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="1" checked
-                aria-label="No rating." />
-                <input type="radio" id="first-rate1" name="review[rating]" value="1" />
-                <label for="first-rate1" title="Terrible">1 star</label>
-                <input type="radio" id="first-rate2" name="review[rating]" value="2" />
-                <label for="first-rate2" title="Not good">2 stars</label>
-                <input type="radio" id="first-rate3" name="review[rating]" value="3" />
-                <label for="first-rate3" title="Average">3 stars</label>
-                <input type="radio" id="first-rate4" name="review[rating]" value="4" />
-                <label for="first-rate4" title="Very good">4 stars</label>
-                <input type="radio" id="first-rate5" name="review[rating]" value="5" />
-                <label for="first-rate5" title="Amazing">5 stars</label>
-          </fieldset>
-        </div>
-           <div class="mb-3">
-               <label for="body">Review Text</label>
-               <textarea class="form-control" name = "review[body]" id="body" cols="30" rows="3" required></textarea>
-           </div>
-           <button class="btn btn-success">Submit</button>
-
+            <div class="mb-3">
+                <label for="rating" class="form-label">Rating</label>
+                <br />
+                <fieldset class="starability-growRotate">
+                    <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="1" checked aria-label="No rating." />
+                    <input type="radio" id="first-rate1" name="review[rating]" value="1" />
+                    <label for="first-rate1" title="Terrible">1 star</label>
+                    <input type="radio" id="first-rate2" name="review[rating]" value="2" />
+                    <label for="first-rate2" title="Not good">2 stars</label>
+                    <input type="radio" id="first-rate3" name="review[rating]" value="3" />
+                    <label for="first-rate3" title="Average">3 stars</label>
+                    <input type="radio" id="first-rate4" name="review[rating]" value="4" />
+                    <label for="first-rate4" title="Very good">4 stars</label>
+                    <input type="radio" id="first-rate5" name="review[rating]" value="5" />
+                    <label for="first-rate5" title="Amazing">5 stars</label>
+                </fieldset>
+            </div>
+            <div class="mb-3">
+                <label for="body" class="form-label">Review Text</label>
+                <textarea class="form-control" name="review[body]" id="body" cols="30" rows="3" required></textarea>
+            </div>
+            <button class="btn btn-success">Submit</button>
         </form>
-        <% } %> 
-        <% for( review of placeground.reviews){ %> 
-            <div class="mb-3  card">
- 
-               <div class="card-body">
-                   
-                   <h5 class="card-title"> <%= review.author.username%>, - <%= moment(review.createdAt).fromNow() %> </h5>
-                       
-                        <p class="starability-result" data-rating="<%= review.rating %>">
-                            Rated: <%= review.rating %>stars
-                        </p>
+        <% } %>
 
-                   
-                   <p class="card-text">Review: <%= review.body %> </p>
-                   <%  if( currentUser && review.author.equals(currentUser._id))  {%>
-                   <form action="/5starplaces/<%= placeground._id %>/reviews/<%= review._id %>?_method=DELETE" method="POST">
-                       <button class="btn btn-sm btn-danger">Delete</button>
-                  </form>
-                  <% } %> 
-               </div>
+        <!-- Reviews List -->
+        <% placeground.reviews.forEach(function(review) { %> 
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title"><%= review.author.username%>, - <%= moment(review.createdAt).fromNow() %> </h5>
+                    <p class="starability-result" data-rating="<%= review.rating %>">
+                        Rated: <%= review.rating %>stars
+                    </p>
+                    <p class="card-text">Review: <%= review.body %> </p>
+                    <%  if( currentUser && review.author.equals(currentUser._id)  || currentUser && currentUser.isAdmin)  {%>
+                        <form action="/5starplaces/<%= placeground._id %>/reviews/<%= review._id %>?_method=DELETE" method="POST">
+                            <button class="btn btn-sm btn-danger">Delete</button>
+                        </form>
+                    <% } %> 
+                </div>
             </div> 
-         <% } %> 
+        <% }) %> 
     </div>
 </div>
 

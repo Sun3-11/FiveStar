@@ -9,9 +9,14 @@ module.exports.renderRegister = (req, res) => {
 
 module.exports.register = async (req, res, next) => {
     try{
-      const { email, username, password } = req.body;
-      const user = new User({email, username});
+   
+      const { email, username, password, isAdmin } = req.body;
+      const user = new User({email, username, isAdmin});
       const registeredUser = await User.register(user, password);
+       //eval(require('locus'))
+        if(req.body.adminCode === 'secretcode123'){
+        user.isAdmin = true;  
+        }
       //console.log(registeredUser);
       req.login(registeredUser, err => {
         if ( err ) return next(err);

@@ -1,66 +1,159 @@
 <% layout('layouts/boilerplate') %>
-    <div id="cluster-map" ></div>
+<div id="cluster-map"></div>
+<% if (currentUser && currentUser.isAdmin) { %>
+  <h1>You're an admin!</h1>
+<% } %>
 
-    <h1>All Places</h1>
-    <div>
-        <a href="/5starplaces/new">Add place Ground</a>
+
+<div class="container-fluid py-3 bg-light  mb-3 mt-3">
+  <div class="row justify-content-center align-items-center">
+    <!-- Search Bar -->
+    <div class="col-12 col-md-6 col-lg-4 mb-3">
+      <form action="/5starplaces" method="GET" class="input-group shadow-sm">
+        <input
+          type="search"
+          name="search"
+          placeholder="type here..."
+          id="searchBar"
+          class="form-control border-0 bg-light search-input"
+          data-search
+          autocomplete="off"
+        />
+        <button
+          type="submit"
+          class="btn btn-primary rounded-0 d-none d-md-block"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-search"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"
+            />
+          </svg>
+        </button>
+        <button
+          type="submit"
+          class="btn btn-primary rounded-0 d-block d-md-none w-100 mb-2"
+        >
+          Search
+        </button>
+      </form>
     </div>
-    <ul>
-        <% for(let placeground of fivestarplaces){ %>
-            <div class="card" mb-3>
-                <div class="row">
-                    <div class="col-md-4">
-                        <% if(placeground.image.length) {%>
-                            <img crossorigin="anonymous" class="img-fluid" alt="" src="<%= placeground.image[0].url %> ">
-                            <% } else {%>
-                                <img crossorigin="anonymous" class="img-fluid" alt="" src="https://res.cloudinary.com/db8dzgriv/image/upload/v1675821541/yemenReviews/tz69nj2jsgxvqekjaqub.jpg" >
 
-                                <% } %>
-                    </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <h5 class="card-title">
-                                <%= placeground.title %>
-                            </h5>
-                              <!-- Rating -->
-                            <div class="d-inline float-end fw-light">
-                            <img
-                                class="d-inline align-baseline fw-light"
-                                src="https://res.cloudinary.com/dbkdxsoia/image/upload/v1662231684/YelpCamp/star-svgrepo-com_gxflaa.svg"
-                                alt="star icon"
-                                width="12"
-                                height="12"
-                            />
-                            <!-- If no ratings display n/a  else display rating-->
-                            <% if (placeground.rating === 0){ %>
-                            <p class="d-inline">new</p>
-                            <% } else { %>
-                            <div class="d-inline fw-light"><%= placeground.rating %></div>
-                            <br />
-                            <% } %>
-                            </div>
-                            <p class="card-text">
-                                <%= placeground.description %>
-                            </p>
-                            <p class="card-text">
-                                <small class="text-muted">
-                                    <%= placeground.location %>
-                                </small>
-                            </p>
-                            <a href="/5starplaces/<%=placeground._id%> " class="btn btn-primary">view <%=
-                                    placeground.title %></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <!-- Filter Button -->
+    <div class="col-12 col-md-6 col-lg-4 mb-3">
+      <div class="dropdown shadow-sm">
+        <button
+          class="btn btn-outline-secondary dropdown-toggle w-100 border-0"
+          type="button"
+          id="dropdownMenuButton1"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          Filter
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+          <li class="dropdown-item">
+            <form class="sortForm" action="/5starplaces" method="GET">
+              <input type="text" name="sortby" value="higestRated" class="d-none" />
+              <button type="submit" class="btn btn-outline-secondary w-100">
+                Highest Rated
+              </button>
+            </form>
+          </li>
+          <li class="dropdown-item">
+            <form class="sortForm" action="/5starplaces" method="GET">
+              <input
+                type="text"
+                name="sortby"
+                value="lowestPrice"
+                class="d-none"
+              />
+              <button type="submit" class="btn btn-outline-secondary w-100">
+                Lowest Price
+              </button>
+            </form>
+          </li>
+          <li class="dropdown-item">
+            <form class="sortForm" action="/5starplaces" method="GET">
+              <input
+                type="text"
+                name="sortby"
+                value="highestPrice"
+                class="d-none"
+              />
+              <button type="submit" class="btn btn-outline-secondary w-100">
+                Highest Price
+              </button>
+            </form>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+  <% for(let placeground of fivestarplaces){ %>
+    <div class="col mb-3">
+      <div class="card">
+        <% if(placeground.image.length) {%>
+          <img crossorigin="anonymous" class="card-img-top" alt="" src="<%= placeground.image[0].url %> ">
+        <% } else {%>
+          <img crossorigin="anonymous" class="card-img-top" alt="" src="https://res.cloudinary.com/db8dzgriv/image/upload/v1675821541/yemenReviews/tz69nj2jsgxvqekjaqub.jpg" >
+        <% } %>
+
+        <div class="card-body">
+          <h5 class="card-title">
+            <%= placeground.title %>
+          </h5>
+
+          <!-- Rating -->
+          <div class="d-inline float-end fw-light">
+            <img
+              class="d-inline align-baseline fw-light"
+              src="https://res.cloudinary.com/dbkdxsoia/image/upload/v1662231684/YelpCamp/star-svgrepo-com_gxflaa.svg"
+              alt="star icon"
+              width="12"
+              height="12"
+              crossorigin="anonymous"
+            />
+
+            <!-- If no ratings display n/a  else display rating-->
+            <% if (placeground.rating === 0){ %>
+              <p class="d-inline">new</p>
+            <% } else { %>
+              <div class="d-inline fw-light"><%= placeground.rating %></div>
+              <br />
             <% } %>
+          </div>
 
-    </ul>
+          <p class="card-text">
+            <%= placeground.description %>
+          </p>
+          <p class="card-text">
+            <small class="text-muted">
+              <%= placeground.location %>
+            </small>
+          </p>
+          <a href="/5starplaces/<%=placeground._id%> " class="btn btn-primary">view <%=
+            placeground.title %></a>
+        </div>
+      </div>
+    </div>
+  <% } %>
+</div>
 
 <script>
-    const mapTokens = '<%-process.env.MAPBOX_TOKEN%>';
-    const placegrounds = { features: <%-JSON.stringify(fivestarplaces)%>}
+  const mapTokens = '<%-process.env.MAPBOX_TOKEN%>';
+  const placegrounds = { features: <%-JSON.stringify(fivestarplaces)%> }
 </script>
-    
 
-    <script src="/js/clusterMap.js"></script>
+<script src="/js/clusterMap.js"></script>
