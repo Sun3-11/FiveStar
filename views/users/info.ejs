@@ -1,0 +1,98 @@
+<% layout('layouts/boilerplate') %>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3">
+            <!-- START PROFILE SIDEBAR -->
+          <div class="profile-sidebar">
+            <!-- Profile Image -->
+            
+            <div class="col-md-3 text-center bg-light"  style="max-height: 350px;">
+                <% const imgsrc = author.avatarSrc ||  "/img/user.png" %>
+                <img src=<%= imgsrc %> class="img-thumbnail mt-5 mb-4" alt="profile_picture" style="height: 200px; border-radius: 50%;">
+                <h5><%= author.username %></h5>	
+                <h6> <% author.firstName %> <% author.lastName %></h6>
+            </div>
+            <!-- Profile Info -->
+            <div class="profile-userinfo">
+              <div class="profile-userinfo-fullname">
+                <%= author.firstName + " " + author.lastName %>
+              </div>
+              <div class="profile-userinfo-username">
+                <%= "@" + author.username %>
+              </div>
+            </div>
+            <!-- Social Button -->
+            <div class="profile-userbuttons">
+              <button type="button" class="btn btn-success btn-sm">Follow</button>
+              <a class="btn btn-danger btn-sm" href="mailto:<%= author.email %>">Email</a>
+            </div>
+            <!-- User Menu -->
+            <div class="profile-usermenu">
+              <ul class="nav flex-column">
+                <li class="nav-item active">
+                  <a class="nav-link" href="#">
+                  <i class="fas fa-campground"></i>
+                  Posts </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">
+                  <i class="fas fa-users"></i>
+                  Followers </a>
+                </li>
+                <% if (currentUser && author._id.equals(currentUser._id)) { %>
+                <li class="nav-item">
+                  <a class="nav-link" href="/users/<%= author._id%>/edit">
+                  <i class="fas fa-edit"></i>
+                  Edit Profile </a>
+                </li>
+                <% } %>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-9">
+          <!-- User Contents -->
+          <div class="col-md-8 offset-md-1 text-center bg-light">
+            <% if (placegrounds.length == 0) { %>
+                <div class="d-flex justify-content-center align-items-center" style="height: 50vh;">
+                    <h3 class="text-center ">This user has no campsites to display, yet..</h3>
+                </div>
+            <% } else { %>
+                <h2 class="my-3">Campgrounds added by <%= author.username %></h1>
+                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                    <% for( let placeground of placegrounds ) { %>
+                        <div class="col p-2">
+                            <div class="card text-center text-md-start rounded-2 p-2">
+                                <% if (placeground.image.length === 0) { %>
+                                    <img class="img-fluid img-thumbnail"  
+                                    crossorigin=""  src="https://res.cloudinary.com/duwga9whh/image/upload/v1677057261/YelpCamp/default_o9ywoe.png" 
+                                    alt="default">
+                                <% } else { %>
+                                    <img src="<%= placeground.image[0].url %>"  crossorigin=""  alt="" class="img-fluid img-thumbnail">
+                                <% } %>
+                                <div class="card-body">
+                                    <h5 class="card-title"><%= placeground.title %></h5>
+                                    <% if (placeground.description.length > 75) { %>
+                                        <p class="card-text"><%= placeground.description.slice(0, 75) %>...</p>
+                                    <% } else {%>
+                                        <p class="card-text"><%= placeground.description %></p>
+                                    <% } %> 
+                                    <p class="card-text">
+                                        <small class="text-muted"><img src="images/location-sign.svg" alt=""><%= placeground.location %></small>
+                                    </p>
+                                    <a href="/5starplaces/<%= placeground._id  %>" class="btn btn-sm btn-primary">View <%= placeground.title %></a>
+                                </div>
+                            </div>
+                        </div>
+                    <% } %>
+                </div>
+            <% } %>
+        </div>
+        </div>
+      </div>
+    </div>
+
+
+   
+   

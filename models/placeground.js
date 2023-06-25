@@ -54,6 +54,8 @@ const PlacegroundSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'User',
     },
+    username: String,
+
     reviews: [
         {
             type: Schema.Types.ObjectId,
@@ -69,6 +71,7 @@ const PlacegroundSchema = new Schema({
       default: false,
     },
     tag: String,
+
 }, opts);
 
 PlacegroundSchema.virtual('properties.popUpMarkup').get(function () {

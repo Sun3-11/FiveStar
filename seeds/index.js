@@ -21,7 +21,7 @@ const sample = array => array[Math.floor(Math.random() * array.length)];
 
 const seedDB = async () => {
     await Placeground.deleteMany({});
-    for (let i = 0; i < 150; i++) {
+    for (let i = 0; i < 50; i++) {
         const random1000 = Math.floor(Math.random() * 5);
         
         const price = Math.floor(Math.random() * 2) + 1;

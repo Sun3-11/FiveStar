@@ -22,7 +22,7 @@ const extension = (joi) => ({
 });
 
 const Joi = BaseJoi.extend(extension)
-
+//places
 module.exports.placegroundSchema = Joi.object({
     placeground: Joi.object({
         title: Joi.string().required().escapeHTML(),
@@ -36,10 +36,26 @@ module.exports.placegroundSchema = Joi.object({
     }).required(),
     deleteImages: Joi.array()
 });
-
+//review
 module.exports.reviewSchema = Joi.object({
     review: Joi.object({
         rating: Joi.number().required().min(1).max(5),
         body: Joi.string().required().escapeHTML(),
     }).required()
+});
+
+//user
+module.exports.UserSchema = Joi.object({
+    user: Joi.object({
+        username: Joi.string().required().escapeHTML(),
+        //image: Joi.string().required(),
+        email: Joi.string().required().escapeHTML(),
+        password: Joi.string().required().escapeHTML(),
+        // avatar: Joi.string().required().escapeHTML(),
+        firstName: Joi.string().required().escapeHTML(),
+        lastName: Joi.string().required().escapeHTML()
+
+
+    }).required(),
+    // deleteImages: Joi.array()
 });

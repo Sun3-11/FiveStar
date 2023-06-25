@@ -8,7 +8,9 @@ const reviewSchema = new Schema({
    author: {
       type: Schema.Types.ObjectId,
       ref: 'User'
-  }
+  },
+  username: String
+
 });
 
 module.exports = mongoose.model('Review', reviewSchema);

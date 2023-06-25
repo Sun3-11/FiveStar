@@ -26,14 +26,14 @@ const reviewsRouter = require('./routes/reviews');
 
 const MongoStore = require("connect-mongo")//(session);
 
-const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/yemen-review';
-//const dbUrl = process.env.DB_URL //'mongodb://localhost:27017/yemen-review';
+// const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/yemen-review';
+const dbUrl = 'mongodb://localhost:27017/yemen-review';
 
 
 //Mongoose DB connections
 mongoose.set('strictQuery', true); 
 mongoose.connect(dbUrl, {
- 
+
     useNewUrlParser: true,
     useUnifiedTopology: true,
 
@@ -154,7 +154,7 @@ passport.deserializeUser(User.deserializeUser());
 
 app.use((req, res, next) => {
    if(!['/login', '/'].includes(req.originalUrl)){
-      req.session.returnTo = req.originalUrl;
+    req.session.returnTo = req.originalUrl;
  
     }
   // console.log(req.query)

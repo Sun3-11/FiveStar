@@ -6,3 +6,11 @@ function previewMultiple(event) {
         document.getElementById("formFile").innerHTML += '<img src="' + urls + '">';
     }
 }
+function previewMultiple2(e) {
+    var images = document.getElementById("image2");
+    var number = images.files.length;
+    for (i = 0; i < number; i++) {
+        var urls = URL.createObjectURL(e.target.files[i]);
+        document.getElementById("formFile2").innerHTML += '<img src="' + urls + '">';
+    }
+}

@@ -1,9 +1,129 @@
+/* Main Rules */
+:root{
+    --white-c: #ffffff;
+    --black-c: #000;
+    --body-background-c: #FD7AC0;
+    --wrapper-background-c: #FAFAFA;
+    --wrapper-shadow-c: rgba(0, 0, 0, 0.219);
+    --buttons-background-c: rgba(255, 255, 255, 0.219);
+    --buttons-active-background-c: rgba(135, 207, 235, 0.493);
+  }
+  /* var(--wrapper-background-c) */
 #cluster-map {
     width: 100%;
     height: 500px;
 }
 
 #map {
-    width: 100%;
-    height: 300px;
+    /* max-height: 20%; */
+    border-radius: 25px;
+    max-width: 320px;
+    /* margin-left: 10%; */
+    border-bottom: inset;
+
+}
+.card-titlep {
+    display: flex;
+    /* float: left; */
+    background: rgb(79, 82, 248);
+    padding: 16px;
+    height: fit-content;
+    border-radius: 25px;
+    text-align: center;
+    color: var(--white-c);
+    flex-direction: column;
+
+}
+.rowShow {
+
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+    /* flex-direction: row;*/
+}
+.text-end{
+    height: fit-content;
+    background-color: var(--wrapper-background-c);
+    border-radius: 12px;
+    margin-top: 13px;
+    color: #82A1F4;
+    padding: 25px;
+    display: flex;
+    justify-content: center;
+}
+
+#carouselExampleIndicators{
+    margin-top: 20px;
+    border-radius: 3%;
+}
+
+.cardProfileandDesc{
+    display: flex;
+    align-content: stretch;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: stretch;
+    }
+.profie{
+
+    background-color: var(--wrapper-background-c);
+    padding: 20px;
+    border-radius: 17px;
+    margin-bottom: 20px;
+
+}
+.desCard {
+    background-color: var(--wrapper-background-c);
+    padding: 16px;
+    border-radius: 6%;
+    margin-bottom: 20px;
+}
+.info{
+    background-color: var(--wrapper-background-c);
+    padding: 10px;
+    border-radius: 3%;
+    display: grid;
+    justify-content: space-around;
+    flex-direction: row-reverse;
+    flex-wrap: wrap;
+    justify-items: center;
+}
+.profie{
+    background-color: var(--wrapper-background-c);
+    padding: 20px;
+    border-radius: 17px;
+}
+.ReviewCard{
+/* background: var(--wrapper-background-c); */
+margin-top: 30px;
+/* border-radius: 20px; */
+padding-top: 15px;
+
+}
+.ListReviews{
+
+height: 34%;
+
+}
+.reviewSection{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.textarea {
+    width: 50%;
+    border-radius: 9px;
+    border: 1px solid var(--bs-gray-500);
+    font-size: medium;
+    font-weight: 400;
+}
+.textarea::placeholder {
+    color: rgb(145, 148, 145);
+    font-size: large;
+    font-weight: 600;
+}
+
+hr{
+    width: 95%;
+    margin-inline: auto;
 }
