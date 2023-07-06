@@ -6,37 +6,31 @@ const Schema = mongoose.Schema;
 
 
 const UserSchema = new Schema({
-//   email: {
-//     type : String,
-//     required: true,
-//     unique: true
-//   },
-  isAdmin: {type: Boolean, default: false},
- username: {
+isAdmin: {type: Boolean, default: false},
+username: {
     type: String,
     required: true,
     minlength: 5,
     maxlength: 50,
     trim: true,
     unique: true
-  },
-  email: {
+},
+email: {
     type: String,
     required: true,
     minlength: 5,
     maxlength: 255,
     trim: true,
     unique: true
-  },
-  password: {
+},
+password: {
     type: String,
-  },
+},
 
-  avatarSrc: String,
-
+avatarSrc : String,
 
 firstName: String,
-  lastName: String,
+lastName: String,
 //   resetPasswordToken: String,
 //   resetPasswordExpires: Date
 });

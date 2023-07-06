@@ -7,7 +7,7 @@ function previewMultiple(event) {
     }
 }
 function previewMultiple2(e) {
-    var images = document.getElementById("image2");
+    var images = document.getElementById("avatarSrc");
     var number = images.files.length;
     for (i = 0; i < number; i++) {
         var urls = URL.createObjectURL(e.target.files[i]);

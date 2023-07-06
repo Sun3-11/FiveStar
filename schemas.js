@@ -57,5 +57,5 @@ module.exports.UserSchema = Joi.object({
 
 
     }).required(),
-    // deleteImages: Joi.array()
+    deleteImages: Joi.array()
 });

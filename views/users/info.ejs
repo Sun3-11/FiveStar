@@ -1,59 +1,64 @@
 <% layout('layouts/boilerplate') %>
 
     <div class="container">
-      <div class="row">
+    <div class="row">
         <div class="col-md-3">
             <!-- START PROFILE SIDEBAR -->
-          <div class="profile-sidebar">
+        <div class="profile-sidebar">
             <!-- Profile Image -->
-            
+                <h2>Welcome <%= currentUser.username %></h2>
+                <!-- <% //if (currentUser.avatarUrl) { %>
+                <img src="<%=// currentUser.avatarUrl %>">
+                <% //} %> -->
             <div class="col-md-3 text-center bg-light"  style="max-height: 350px;">
-                <% const imgsrc = author.avatarSrc ||  "/img/user.png" %>
+                <% const imgsrc = avatarUrl || "/img/user.jpg" %>
                 <img src=<%= imgsrc %> class="img-thumbnail mt-5 mb-4" alt="profile_picture" style="height: 200px; border-radius: 50%;">
                 <h5><%= author.username %></h5>	
                 <h6> <% author.firstName %> <% author.lastName %></h6>
             </div>
             <!-- Profile Info -->
             <div class="profile-userinfo">
-              <div class="profile-userinfo-fullname">
+            <div class="profile-userinfo-fullname">
                 <%= author.firstName + " " + author.lastName %>
-              </div>
-              <div class="profile-userinfo-username">
+            </div>
+            <div class="profile-userinfo-username">
                 <%= "@" + author.username %>
-              </div>
+            </div>
             </div>
             <!-- Social Button -->
             <div class="profile-userbuttons">
-              <button type="button" class="btn btn-success btn-sm">Follow</button>
-              <a class="btn btn-danger btn-sm" href="mailto:<%= author.email %>">Email</a>
+            <button type="button" class="btn btn-success btn-sm">Follow</button>
+            <a class="btn btn-danger btn-sm" href="mailto:<%= author.email %>">Email</a>
             </div>
             <!-- User Menu -->
             <div class="profile-usermenu">
-              <ul class="nav flex-column">
+            <ul class="nav flex-column">
                 <li class="nav-item active">
-                  <a class="nav-link" href="#">
-                  <i class="fas fa-campground"></i>
-                  Posts </a>
+                <a class="nav-link" href="#">
+                <i class="fas fa-campground"></i>
+                Posts </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">
-                  <i class="fas fa-users"></i>
-                  Followers </a>
+                <a class="nav-link" href="#">
+                <i class="fas fa-users"></i>
+                Followers </a>
                 </li>
-                <% if (currentUser && author._id.equals(currentUser._id)) { %>
+                <!-- <% //if (currentUser && author._id.equals(currentUser._id)) { %> -->
+                <% if( currentUser && author.equals(currentUser._id) || currentUser && currentUser.isAdmin) { %> 
+
                 <li class="nav-item">
-                  <a class="nav-link" href="/users/<%= author._id%>/edit">
-                  <i class="fas fa-edit"></i>
-                  Edit Profile </a>
+                <a class="nav-link" href="/users/<%= author._id%>/uedit">
+                <i class="fas fa-edit"></i>
+                Edit Profile </a>
                 </li>
                 <% } %>
-              </ul>
+            </ul>
             </div>
-          </div>
+        </div>
         </div>
         <div class="col-md-9">
-          <!-- User Contents -->
-          <div class="col-md-8 offset-md-1 text-center bg-light">
+        <!-- User Contents -->
+        <div class="col-md-8 offset-md-1 text-center bg-light">
             <% if (placegrounds.length == 0) { %>
                 <div class="d-flex justify-content-center align-items-center" style="height: 50vh;">
                     <h3 class="text-center ">This user has no campsites to display, yet..</h3>
@@ -90,9 +95,5 @@
             <% } %>
         </div>
         </div>
-      </div>
     </div>
-
-
-   
-   
+    </div>

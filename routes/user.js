@@ -4,36 +4,52 @@ const catchAsync = require('../utils/catchAsync');
 const User = require('../models/user');
 const passport = require('passport');
 const users = require('../controllers/users');
-// const multer = require('multer');
-const {isLoggedIn} = require('../middlewre');
+const multer = require('multer');
+const {isLoggedIn,validateUser} = require('../middlewre');
+const path = require('path');
 
-// const {storage} = require('../cloudinary');
-// const upload = multer({ dest: 'uploads/' });
-// const upload = multer({storage });
-const multer  = require('multer');
-const {storage} = require('../cloudinary');
-// const upload = multer({ dest: 'uploads/' });
-const upload = multer({storage });
+// Multer لرفع الملفات
+const storage = multer.diskStorage({
+    destination: './public/uploads/',
+    filename: function (req, file, cb) {
+      cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+    }
+  });
+const upload = multer({ storage });
 
-router.get('/UDashbord', catchAsync(users.AllUsers))
+  //User Dashbord
+
+// METHOD  : GET
+// ROUTE   : /uDashbord
+// FUNCTION: List all users
+router.get('/uDashbord', catchAsync(users.AllUsers))
+
 //register
+
+// METHOD  : GET and POST
+// ROUTE   : /register
+// FUNCTION: Create a new user
 router.route('/register')
     .get( users.renderRegister)
-    .post( catchAsync( users.register) )
+    .post(  upload.single('avatarSrc'),catchAsync(users.register) )
 
-//login
+
+//Login
+
+// METHOD  : GET and post 
+// ROUTE   : /login
+// FUNCTION: login
 router.route('/login')
     .get( users.renderLogin)
     .post(
-       
         passport.authenticate("local", {
-          failureFlash: true,
-          failureRedirect: "/login",
-          failureMessage: true,
-          keepSessionInfo: true,
+        failureFlash: true,
+        failureRedirect: "/login",
+        failureMessage: true,
+        keepSessionInfo: true,
         }),
-      users.login
-      )
+        users.login
+    )
 
 //Profile
 
@@ -42,17 +58,21 @@ router.route('/login')
 // FUNCTION: Show information page and Modify
 router.route('/users/:id')
     .get(  users.ShowProfile)
-    // .patch( users.ModifyProfile )
-  
-    // router.get("/users/:id",
+    .patch( upload.single('avatarSrc'), users.ModifyProfile)
 
-  
+
+//edit Profile
   // METHOD  : GET
-  // ROUTE   : /users/:id/edit
+  // ROUTE   : /users/:id/uedit
   // FUNCTION: Show the edit profile page
 
-// router.get('/user/:id/uedit', isLoggedIn,  users.EditProfile);
+router.get('/users/:id/uedit', isLoggedIn,  users.EditProfile);
 
+
+//logout
+  // METHOD  : GET
+  // ROUTE   : /logout
+  // FUNCTION: logout
 router.get('/logout', users.logout)
 
 

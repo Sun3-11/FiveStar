@@ -24,7 +24,9 @@
                       <% users.forEach(function(user){ %>
                       <tr>
                         <td class="profile-userpic" style="text-align: center;">
-                          <img src="<%= user.avatar %>" class="img-responsive" alt="User Avatar">
+                            <img src="/uploads/<%= user.avatarSrc %>" class="img-responsive" alt="Avatar">
+
+                          <!-- <img src="<%= //user.avatarSrc.url %>" class="img-responsive" alt="User Avatar"> -->
                         </td>
                         <td class="profile-userinfo-username" style="text-align: center;">
                           <%= "@" + user.username %>
