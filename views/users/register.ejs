@@ -1,45 +1,63 @@
 <% layout('layouts/boilerplate') %> 
 
-<h1>Register</h1>
-<!-- <form action="/register" method="POST" class="validated-form" novalidate> -->
+    <!-- <h1>Register</h1> -->
     <form action="/register" method="POST" enctype="multipart/form-data">
-
-    <div class="mb-3">
-        <label class="form-label" for="username">Username</label>
-        <input class="form-control" type="text" id="username" name="username"required>
-        <!-- <input id="username" class="form-control" pattern="^[A-Za-z0-9]+$" title="May only contain a-z and 0-9" type="text" name="username" placeholder="Username (case sensitive)" required autofocus>
-        <label for="username">Username (case sensitive)</label> -->
-        <div class="valid-feedback">
-            Looks Good!
-        </div>
-    </div>
-
-    <div class="mb-3">
-        <label class="form-label" for="email">Email</label>
-        <input class="form-control" type="email" id="email" name="email"required>
-        <!-- <input id="email" class="form-control" type="email" name="email" placeholder="Email Address" required>
-        <label for="email">Email Address</label> -->
-        <div class="valid-feedback">
-            Looks Good!
-        </div>
-    </div>
-    <div class="form-group">
-        <input id="first-name" class="form-control" type="text" name="firstName" placeholder="First Name" required>
-        <label for="first-name">First Name</label>
-    </div>
-
-    <div class="form-group">
-        <input id="last-name" class="form-control" type="text" name="lastName" placeholder="Last Name" required>
-        <label for="last-name">Last Name</label>
-    </div>
-
-    <!-- choose image local ...  -->
-     <div class="form-group">
-        <div class="mb-3">
-            <label class="form-label">Choose Image(s)</label>
-            <input id="campground-image" class="form-control" type="file" accept="image/*" name="avatarSrc" autocomplete="off">
+    
+        <!-- logo section  -->
+        <!-- <img src="/img/OIG.jpg" style="max-width: 33%; margin: auto;" alt=""> -->
+    
+    <!-- <choose image local> section...  -->
+    <div class="">
+        <!-- <label class="form-label">Choose Image</label> -->
+        <div class="container-1">
+            <input class="choseImage" id="campground-image"  type="file" accept="image/*" name="avatarSrc" placeholder="Choose Image.." autocomplete="off">
         </div> 
     </div>
+
+        <!-- username section  -->
+        <div class="user-name">
+            <label for="username">Username </label>
+            <div class="container-1">
+                <i class="fa fa-user-o user" aria-hidden="true"></i>
+                <input  type="text" id="username " name="username" placeholder="Username (case sensitive)"required>
+                <!-- <input id="username" class="form-control" pattern="^[A-Za-z0-9]+$" title="May only contain a-z and 0-9" type="text" name="username" placeholder="Username (case sensitive)" required autofocus> -->
+            </div>
+            <div class="valid-feedback">
+                Looks Good!
+            </div>
+        </div>
+
+        <!-- Email section  -->
+        <div class="user-name">
+            <label  for="email">Email</label>
+            <div class="container-1">
+                <i class="fa fa-user-o user" aria-hidden="true"></i>
+                <input  type="email" id="email" name="email"  placeholder="Email Address"required>
+            </div>
+            <div class="valid-feedback">
+                Looks Good!
+            </div>
+        </div>
+
+        <!-- Firstname section  -->
+        <div class="user-name">
+            <label for="first-name">First Name</label>
+            <div class="container-1">
+                <i class="fa fa-user-o user" aria-hidden="true"></i>
+                <input id="first-name"  type="text" name="firstName" placeholder="First Name" required>
+            </div>
+        </div>
+
+        <!-- lastname section  -->
+        <div class="user-name">
+            <label for="last-name">Last Name</label>
+            <div class="container-1">
+                <i class="fa fa-user-o user" aria-hidden="true"></i>
+                <input id="last-name" type="text" name="lastName" placeholder="Last Name" required>
+            </div>
+        </div>
+
+   
 
     <!-- Admain permation -->
     <!-- <div class="mb-3">
@@ -50,9 +68,13 @@
         </div>
     </div> -->
 
-    <div class="mb-3">
-        <label class="form-label" for="password">Password</label>
-        <input class="form-control" type="password" id="password" name="password">
+    <!-- password section  -->
+    <div class="password">
+        <label  for="password">Password</label>
+        <div class="container-1">
+            <i class="fa fa-lock lock" aria-hidden="true"></i>
+            <input  type="password" id="password" name="password">
+        </div>    
         <!-- <input id="password" class="form-control" type="password" name="password" placeholder="Password (case sensitive)" required>
         <label for="password">Password (case sensitive)</label> -->
         <div class="valid-feedback">
@@ -60,5 +82,15 @@
         </div>
     </div>
 
-    <button class="btn btn-success">Register</button>
+    <!-- Register section -->
+    <div class="sign">
+        <button class="sign">Register</button>
+        
+    </div>
+
+    <!-- balls section -->
+    <div class="container-2">
+        <div class="balls"></div>
+        <div class="balls"></div>
+    </div>
 </form>

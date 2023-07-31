@@ -1,23 +1,50 @@
 <% layout('layouts/boilerplate') %> 
+<link rel="stylesheet" href="/style/loginAndRegister.css">
 
-<h1>Login</h1>
+<div class="loginCard">
+<!-- <h1>Login</h1> -->
 <form action="/login" method="POST" class="validated-form" novalidate>
-    <div class="mb-3">
-        <label class="form-label" for="username">Username</label>
-        <input class="form-control" type="text" id="username" name="username"required>
-        <div class="valid-feedback">
-            Looks Good!
-        </div>
-    </div>
+    
+    <!-- logo section  -->
+    <img src="/img/OIG.jpg" style="max-width: 33%; margin: auto;" alt="">
 
     
-    <div class="mb-3">
-        <label class="form-label" for="password">Password</label>
-        <input class="form-control" type="password" id="password" name="password"required>
+    <!-- username section  -->
+    <div class="user-name">
+        <label  for="username">Username</label>
+        <div class="container-1">
+            <i class="fa fa-user-o user" aria-hidden="true"></i>
+            <input  type="text" id="username user" name="username"required  placeholder="Type Your Username">
+
+        </div>
         <div class="valid-feedback">
             Looks Good!
         </div>
     </div>
- 
-    <button class="btn btn-success">Login</button>
+
+        <!-- password section  -->
+    <div class="password">
+        <label  for="password">Password</label>
+        <div class="container-1">
+            <i class="fa fa-lock lock" aria-hidden="true"></i>
+            <input type="password"  id="password" placeholder="Type Your Password" name="password"required>
+            <a href="#">Forgot?</a>
+        </div>
+        <div class="valid-feedback">
+            Looks Good!
+        </div>
+    </div>
+    
+    <!-- login section -->
+    <div class="sign">
+        <button>Login</button>
+        <a href="#">Creat Account?</a>
+    </div>
+
+    <!-- balls section -->
+    <div class="container-2">
+        <div class="balls"></div>
+        <div class="balls"></div>
+    </div>
 </form>
+</div>

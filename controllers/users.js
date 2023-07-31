@@ -99,7 +99,7 @@ module.exports.ModifyProfile = async (req, res) => {
         } else {
           // حذف الصورة السابقة إذا المستخدم حمل صورة جديدة
         if (updateUser.avatarSrc) {
-            //  حذف الصورة السابقة من المجلد "uploads"
+            //    حذف الصورة السابقة من المجلد "uploads"
             fs.unlinkSync( path.join(__dirname, '..', '/public/uploads', updateUser.avatarSrc));
         }
     

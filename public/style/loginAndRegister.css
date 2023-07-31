@@ -1,0 +1,169 @@
+
+.loginCard {
+    /* display: flex;
+    flex-direction: column;
+    font-family: cursive;
+     */
+    width:98%;
+    height: 100%;
+    margin: 0 auto;
+    /* font-family: cursive; */
+    align-items: center;
+    font-family: sans-serif;
+}
+
+
+/* style form */
+form{
+    width: 320px;
+    margin: 2rem auto 0;
+    box-shadow: 1px 1px 3px rgba(0,0,0,0.3),
+                -1px -1px 3px rgba(0,0,0,0.3);
+    border-radius: 1rem;
+    overflow: hidden;
+    padding-top: 1rem;
+}
+/* style place holder */
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: #cad2da;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: #cad2da;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: #cad2da;
+}
+:-moz-placeholder { /* Firefox 18- */
+  color: #cad2da;
+}
+
+form a{
+    text-decoration: none;
+}
+/*field style*/
+/*user name section & password section*/
+form .user-name,
+form .password{
+    width: 90%;
+    height: 5rem;
+    margin: 2rem auto;
+    padding-left: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-around;
+    box-shadow: 0 1px 0 rgba(0,0,0,0.25);
+    transition: all 0.5s;
+}
+form  .container-1{
+    display: flex;
+    justify-content: space-around;
+}
+form .user-name label,
+form .password label{
+    color: #789c9e;
+}
+form .user-name .container-1 .user,
+form .password .container-1 .lock{
+    color: #789c9e;
+}
+form .container-1 input[type='text'],
+form .container-1 input[type='password']{
+    outline: none;
+    border: 1px solid transparent;
+    padding:0 0.4rem;
+}
+form .container-1 a{
+    color: #789c9e;
+    transition: color 0.3s;
+}
+form .container-1 a:hover{
+    color: #40a9f8;
+}
+form .container-1 input[type='text']:focus,
+form .container-1 input[type='password']:focus{
+    color: #40a9f8;
+}
+form .sign{
+    display: flex;
+    height:5rem;
+    justify-content: space-around;
+    align-items: center;
+}
+form .sign button{
+    outline: none;
+    border: none;
+    padding: 1.3rem;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 5px;
+    background: linear-gradient(to bottom,#58d9e5 30%,#40a9f8 70%);
+    transition: background 0.5s ease-in-out;
+}
+form .sign button:hover{
+    background: linear-gradient(to bottom,#40a9f8 30%,#58d9e5 70%);
+}
+form .sign a{
+    color: #789c9e;
+    transition: color 0.3s;
+}
+form .sign a:hover{
+    color: #40a9f8;
+}
+form .container-2{
+    display: flex;
+    height: 80px;
+    position: relative;
+}
+form .balls{
+    width: 140px;
+    height: 140px;
+    background-image: linear-gradient(to right,#58d9e5 30%,#40a9f8 70%);
+    border-radius: 50%;
+    position: absolute;
+}
+form .balls:before,
+form .balls:after{
+    content: '';
+    display: block;
+    position: absolute;
+    width:60px;
+    height: 60px;
+    border-radius: 50%;
+}
+form .balls:first-of-type{
+    left: 30%;
+    top:1rem;
+    z-index: 2;
+}
+form .balls:first-of-type:before{
+    width:120px;
+    height:120px;
+    left:-60px;
+    top:30px;
+    background-image: linear-gradient(to right,#58d9e5 30%,#40a9f8 70%);
+}
+form .balls:first-of-type:after{
+    left: -92px;
+    top: 42.5px;
+    background-image: linear-gradient(to right,#58d9e5 30%,#40a9f8 70%);
+}
+form .balls:last-of-type{
+    top:2rem;
+    left:48%;
+    z-index:1;
+}
+form .balls:last-of-type:before{
+    background: aqua;
+    right: -37px;
+    top: 16px;
+    background-image: linear-gradient(to right,#58d9e5 30%,#40a9f8 70%);
+}
+
+.choseImage {
+    width: 10rem;
+    height: 10rem;
+    background: var(--bs-info);
+    border-radius: 100px;
+    content-visibility: hidden;
+}
