@@ -1,28 +1,48 @@
-
-      
-<nav class="navbar  bg-dark navbar-expand-lg bg-body-tertiary " data-bs-theme="dark">
+    <nav class="navbar navbar-expand-lg bg-white" style="padding-bottom: 0; min-height: 0;">
+    
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">FiveStar</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-          <a class="nav-link" href="/">Home</a>
-          <a class="nav-link" href="/5starplaces">Place ground</a>
-          <a class="nav-link" href="/5starplaces/new">new 5starplaces</a>
-          
-        </div>
+        <!-- Brand logo with toggler for small devices -->
+        <!-- <a class="navbar-brand text-black" href="#"><span class="text-primary">F</span>iveStar</a> -->
+        <button style="margin-bottom:3px;" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <img src="/img/OIG.jpg" style="height: 55px;; margin-top: -6px;" alt="">
 
-        <div class="navbar-nav ms-auto">
-      
-          <% if(!currentUser) {%>
-              <a class="nav-link" href="/login">Login</a>
-              <a class="nav-link" href="/register">Register</a>
-          <% } else {%>
-              <a class="nav-link" href="/logout">Logout</a>
-          <% } %>
-       </div>
-      </div>
-  
-  </nav>
+        <!-- Navbar links -->
+        <div class="collapse navbar-collapse" style="margin:3px" id="navbarNavAltMarkup">
+            <!-- Tabs-like navigation links on the left -->
+            <ul class="navbar-nav nav nav-tabs me-auto">
+                <li class="nav-item">
+                    <a style="background: #F8F9FA;font-weight: 500;font-size: larger;" class="nav-link active text-black" href="/"><span class="" style="color: #68D3BD;">F</span>iveStar</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-secondary" href="/UDashbord/"> DashBord</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-secondary" href="/5starplaces">Places</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-secondary" href="/5starplaces/new">Add 5 Star Places</a>
+                </li>
+            </ul>
+
+            <!-- Links on the right -->
+            <ul class="navbar-nav nav nav-tabs ms-auto">
+                <% if (!currentUser) { %>
+                    <li class="nav-item">
+                        <a class="nav-link text-info" href="/login">Login</a>
+                    </li>
+                <% } else { %>
+                    <li class="nav-item">
+                        <a class="nav-link text-danger" href="/logout">Logout</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-black" href="#">
+                            <img src="/img/user.jpg" alt="Profile" class="rounded-circle" style="width: 30px; height: 30px;">
+                        </a>
+                    </li>
+                <% } %>
+            </ul>
+        </div>
+    </div>
+</nav>

@@ -1,7 +1,7 @@
 <% layout('layouts/boilerplate') %> 
 
     <!-- <h1>Register</h1> -->
-    <form action="/register" method="POST" enctype="multipart/form-data">
+    <form action="/register" method="POST" enctype="multipart/form-data" style="background-color: #fff;" class="form">
     
         <!-- logo section  -->
         <!-- <img src="/img/OIG.jpg" style="max-width: 33%; margin: auto;" alt=""> -->
@@ -10,6 +10,7 @@
     <div class="">
         <!-- <label class="form-label">Choose Image</label> -->
         <div class="container-1">
+            
             <input class="choseImage" id="campground-image"  type="file" accept="image/*" name="avatarSrc" placeholder="Choose Image.." autocomplete="off">
         </div> 
     </div>
@@ -81,11 +82,14 @@
             Looks Good!
         </div>
     </div>
-
+   
     <!-- Register section -->
     <div class="sign">
         <button class="sign">Register</button>
-        
+    </div>
+     <!-- login -->
+     <div class="sign">
+        <a href="/login">already have an account? log in</a>
     </div>
 
     <!-- balls section -->

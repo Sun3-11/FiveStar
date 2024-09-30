@@ -1,7 +1,30 @@
 
-<% layout('layouts/boilerplate') %> 
+<% layout('layouts/boilerplate') %>
+<link rel="stylesheet" href="/style/homepage.css">
+
 <% if (currentUser && currentUser.isAdmin) {%>
             <h1>You're an admin!</h1>
          
         <% } %>
-    <h1>Home yemen Reviews </h1>
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <div class="slideshow">
+              <div class="slide " style=" background-image: url('/img/bg1.jpg');"></div>
+              <div class="slide " style="background-image: url('/img/ig6.jpg');"></div>
+              <div class="slide " style="background-image: url('/img/bg5.jpg');"></div>
+
+            </div>
+            <div class="container">
+              <h1 class="hero-title">Welcome to FiveStar</h1>
+              <p class="hero-subtitle">Five Star It allows you to browse the most popular places, Share your property to be at the top, making it easily accessible</p>
+              <a href="/5starplaces" class="btn btn-primary">Show Places</a>
+            </div>
+          </section>
+          
+          
+
+  
+
+
+
+  <!-- Footer -->

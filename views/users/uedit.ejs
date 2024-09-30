@@ -1,50 +1,77 @@
-<!-- <% //include ../partials/header %> -->
 <% layout('layouts/boilerplate') %>
 
-    <!-- Page Contents -->
-    <main class="container">
-      <form class="login-register" action="/users/<%= user._id %>?_method=PATCH" method="POST" enctype="multipart/form-data">
-        
-        <div class="profile-userpic text-center mb-4">
-           <!-- <img class="mb-4" src="<%= //author.avatarSrc %>" alt="" width="100" height="100">  -->
-          <h1 class="h3 mb-3 font-weight-normal">Edit Profile</h1>
-        </div>
+<main class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-6 col-md-8 col-sm-10">
+      <div class="card shadow-lg p-4 rounded">
+        <div class="card-body">
+          <!-- Profile Title -->
+          <div class="text-center mb-4">
+            <h1 class="h3 font-weight-normal" style="color: #68D3BD;" >Edit Profile</h1>
+          </div>
 
-        <div class="form-group">
-          <input id="username" class="form-control" value="<%= user.username %>" pattern="^[A-Za-z0-9]+$" title="May only contain a-z and 0-9" type="text" name="user[username]" placeholder="Username" disabled>
-          <label for="username">Username</label>
-        </div>
-       
-        <div class="form-group">
-          <input id="password" class="form-control" value="<%= user.password %>" type="password" name="password" placeholder="Password (case sensitive)">
-          <label for="password">Password (case sensitive)</label>
-        </div>
+          <!-- Start of Form -->
+          <form class="login-register" action="/users/<%= user._id %>?_method=PATCH" method="POST" enctype="multipart/form-data">
+            
+            <!-- Username (Disabled) -->
+            <div class="form-floating mb-3">
+              <input id="username" class="form-control" value="<%= user.username %>" 
+                     pattern="^[A-Za-z0-9]+$" title="May only contain a-z and 0-9" 
+                     type="text" name="user[username]" placeholder="Username" disabled>
+              <label for="username">Username</label>
+            </div>
 
-        <div class="form-group">
-          <input id="email" class="form-control" type="email" value="<%= user.email %>" name="email" placeholder="Email Address">
-          <label for="email">Email Address</label>
-        </div>
+            <!-- Password -->
+            <div class="form-floating mb-3">
+              <input id="password" class="form-control" value="<%= user.password %>" 
+                     type="password" name="password" placeholder="Password">
+              <label for="password">Password (case sensitive)</label>
+            </div>
 
-        <div class="form-group">
-          <input id="first-name" class="form-control" type="text" value="<%= user.firstName %>" name="firstName" placeholder="First Name">
-          <label for="first-name">First Name</label>
-        </div>
+            <!-- Email -->
+            <div class="form-floating mb-3">
+              <input id="email" class="form-control" type="email" value="<%= user.email %>" 
+                     name="email" placeholder="Email Address">
+              <label for="email">Email Address</label>
+            </div>
 
-        <div class="form-group">
-          <input id="last-name" class="form-control" type="text" value="<%= user.lastName %>" name="lastName" placeholder="Last Name">
-          <label for="last-name">Last Name</label>
-        </div>
+            <!-- First Name -->
+            <div class="form-floating mb-3">
+              <input id="first-name" class="form-control" type="text" value="<%= user.firstName %>" 
+                     name="firstName" placeholder="First Name">
+              <label for="first-name">First Name</label>
+            </div>
 
-        <div class="form-group">
-            <div class="mb-3">
-                <label class="form-label">Choose Image(s)</label>
-                <input id="campground-image" class="form-control" type="file" accept="image/*" name="avatarSrc" autocomplete="off">
-            </div> 
-        </div>
-        
-        <button class="btn btn-lg btn-secondary btn-block" type="submit">Update</button>
-        <a href="/UDashbord/"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Go Back</a>
+            <!-- Last Name -->
+            <div class="form-floating mb-3">
+              <input id="last-name" class="form-control" type="text" value="<%= user.lastName %>" 
+                     name="lastName" placeholder="Last Name">
+              <label for="last-name">Last Name</label>
+            </div>
 
-      </form>
-    </main>
+            <!-- Image Upload -->
+            <div class="mb-4">
+              <label for="campground-image" class="form-label">Choose Profile Picture</label>
+              <input id="campground-image" class="form-control" type="file" accept="image/*" 
+                     name="avatarSrc" autocomplete="off">
+            </div>
+
+            <!-- Submit Button -->
+            <button class="btn btn-lg  w-100 mb-3" style="background-color: #224B60;" type="submit">Update Profile</button>
+
+            <!-- Back Link -->
+            <div class="text-center">
+              <!-- <a href="/UDashbord/" class="btn btn-link">Go Back</a> -->
+              <a class="btn btn-secondary"  href="/users/<%= user._id%>">Back</a>
+            </div>
+
+          </form>
+          <!-- End of Form -->
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+
 

@@ -2,9 +2,11 @@
 <% layout('layouts/boilerplate') %> 
 
     <div class="row">
-        <h1 class="text-conter">Edit Place</h1>
-        <div class="col-6 offset-3">
-            <form action="/5starplaces/<%= placeground._id %>?_method=PUT" method="POST" novalidate class="validated-form" enctype="multipart/form-data">
+        <!-- <h1 class="text-conter">Edit Place</h1> -->
+        <h1 class="text-conter h1 text-center " style="color: #68D3BD;">Edit Place</h1>
+
+        <!-- <div class="col-6 offset-3"> -->
+            <form action="/5starplaces/<%= placeground._id %>?_method=PUT" style="margin:auto;" method="POST" novalidate class="validated-form w-75 shadow-lg p-3 mb-5 bg-body rounded" enctype="multipart/form-data">
               <div class="mb-3">
                   <label class="form-label" for="title">Title</label>
                   <input class="form-control" type="text" id="title" name="placeground[title]" value="<%= placeground.title %>" required>
@@ -30,10 +32,10 @@
                    
                 </select>
             </div>
-                <div class="mb-3">
+                <div class="mb-3 mt-3">
                                     
-                   <div class="input-group ">
-                    <label class="form-label" for="typeplace">Select:</label>
+                   <div class="col-md-4 ">
+                    <label class="form-label mr-3" for="typeplace">Select:</label>
                     <select  class="form-select" aria-label="Default select example" name="placeground[typeplace]" id="typeplace">
                       <% for (let typeplacee of typeplacees) { %>
                       <option  value="<%= typeplacee %>"  <%= placeground.typeplacee === typeplacee ? 'selected' : '' %>><%=typeplacee %> </option>
@@ -42,12 +44,12 @@
                  </div>
             </select>
             </div>
-              <div class="mb-3">
+              <div class="mb-3 mt-3">
                   <label class="form-label" for="description">Description</label>
                   <textarea class="form-control" type="text" id="location" name="placeground[description]" required ><%=   placeground.description %> </textarea>
               </div>
 
-              <div class="mb-3">
+              <div class="mb-3 mt-3">
                 <label class="form-label">Add more Image(s)</label>
                 <div class="form-file custom-file">
                       <input class="form-control custom-file-input" type="file" id="image" name="image" multiple onchange="previewMultiple(event)">
@@ -69,28 +71,32 @@
             <!--//////////////////////  -->
            
 
-                <h6>Delete Images: </h6>
-                <div class="row row-cols-1 row-cols-md-4 g-4 mb-3">
-                    <% placeground.image.forEach((image, i) => { %>
+            <h5 style="padding:5px">Delete Images: </h5>
+            <div class="row row-cols-1 row-cols-md-4 g-4 mb-3">
+                <% placeground.image.forEach((image, i) => {%>
                     <div class="col">
-                        <div class="card">
-                            <label for="image-<%= i %>"><img class="card-img" src="<%= image.thumbnail %>" alt="">
-                                <div class="card-img-overlay text-end pt-1 pe-2">
-                                    <input class="form-check-input" type="checkbox" name="deleteImages[]"
-                                        value="<%= image.filename %>" id="image-<%= i %>">
+                        <div class="card ">
+                            <label for="image-<%=i %>">
+                                <!-- تحقق من أن مسار الصورة صحيح -->
+                                <img crossorigin="anonymous"  class="card-img-top" src="<%= image.thumbnail %>" alt="Image <%= i + 1 %>">
+                                
+                                <div class=" pe-2" style="justify-content: center; padding:3px; display: flex; background: aliceblue;">
+                                    <input class="form-check-input" type="checkbox" name="deleteImages[]" value="<%= image.filename %>" id="image-<%= i %>">
                                 </div>
                             </label>
                         </div>
                     </div>
-                    <% }) %>
-                </div>
+                <% }) %>
+              
+            </div>
+            
             <!-- ///////////////////// -->
 
-                 <div class="mb-3">
+                 <div class="mb-3 mt-5 d-flex justify-content-center">
                   <button class="btn btn-info">Update Place</button>
                  </div>
-                 <a href="/5starplaces/<%= placeground._id %> ">Back To Placeground</a>
+                 <a class="btn btn-secondary" href="/5starplaces/<%= placeground._id %> "> Back </a>
           </form>
-        </div>
+        <!-- </div> -->
      </div>
   

@@ -1,57 +1,98 @@
-<!-- <% //include ../partials/header %> -->
 <% layout('layouts/boilerplate') %>
 
-    <!-- Page Contents -->
-    <main role="main" class="flex-shrink-0">
-      <div class="container">
+<!-- Page Contents -->
+<main role="main" class="flex-shrink-0">
+  <div class="container my-5">
 
-        <section>
-          <div class="row">
-            <div class="main-box col-md-12">
-              <div class="main-box-body clearfix">
-                <div class="table-responsive">
-                  <table class="table user-list">
-                    <thead>
-                      <tr>
-                      <th>&nbsp;</th>
-                      <th class="text-center"><span>Username</span></th>
-                      <th class="text-center"><span>Name</span></th>
-                      <th class="text-center"><span>Email</span></th>
-                      <th>&nbsp;</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <% users.forEach(function(user){ %>
-                      <tr>
-                        <td class="profile-userpic" style="text-align: center;">
-                            <img src="/uploads/<%= user.avatarSrc %>" class="img-responsive" alt="Avatar">
-
-                          <!-- <img src="<%= //user.avatarSrc.url %>" class="img-responsive" alt="User Avatar"> -->
-                        </td>
-                        <td class="profile-userinfo-username" style="text-align: center;">
-                          <%= "@" + user.username %>
-                        </td>
-                        <td class="profile-userinfo-fullname" style="text-align: center;">
-                          <%= user.firstName + " " + user.lastName %>
-                        </td>
-                        <td style="text-align: center;">
-                          <a href="mailto:<%= user.email %>"><%= user.email %></a>
-                        </td>
-                        <td>
-                          <form class="inline-form" action="/users/<%= user._id %>" method="GET">
-                            <button class="btn btn-sm btn-outline-secondary">View Profile</button>
-                          </form>
-                        </td>
-                      </tr>
-                      <% }); %>
-                    </tbody>
-                  </table>
-                </div>
+    <section>
+      <div class="row justify-content-center">
+        <div class="col-md-10">
+        
+          <!-- User List Card -->
+          <div class="card shadow-lg">
+            
+            <div class="card-header  text-white text-center p-3" style="background-color: #68D3BD;">
+              <h3 class="mb-0" style="font-size: large;font-family: cursive;font-weight: bold;">User Dashboard</h3>
+            </div>
+              <!-- Search Form -->
+              <div class=" shadow-sm mb-4 mt-5 w-75 m-auto ">
+                <input type="text" id="userSearch" class="form-control" placeholder="Search by username or email" aria-label="Search">
+              </div>
+            <div class="card-body p-4">
+              <div class="table-responsive">
+                <table class="table table-bordered table-hover user-list">
+                  <thead class="thead-light">
+                    <tr>
+                      <th>Avatar</th>
+                      <th class="text-center">Username</th>
+                      <th class="text-center">Name</th>
+                      <th class="text-center">Email</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="userTable">
+                    <% users.forEach(function(user){ %>
+                    <tr>
+                      <td class="text-center">
+                        <img src="/uploads/<%= user.avatarSrc %>" class="img-fluid rounded-circle" alt="Avatar" style="width: 50px; height: 50px;">
+                      </td>
+                      <td class="text-center align-middle user-username">
+                        <%= "@" + user.username %>
+                      </td>
+                      <td class="text-center align-middle user-fullname">
+                        <%= user.firstName + " " + user.lastName %>
+                      </td>
+                      <td class="text-center align-middle user-email">
+                        <a href="mailto:<%= user.email %>"><%= user.email %></a>
+                      </td>
+                      <td class="text-center align-middle">
+                        <form action="/users/<%= user._id %>" method="GET">
+                          <button class="btn btn-sm "style="background-color: #224B60;" >View Profile</button>
+                        </form>
+                      </td>
+                    </tr>
+                    <% }); %>
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>
-        </section>
-
+        </div>
       </div>
-    </main>
+    </section>
 
+  </div>
+</main>
+
+<!-- JavaScript for Filtering -->
+<script>
+  // Getting the input and the table
+  const searchInput = document.getElementById('userSearch');
+  const userTable = document.getElementById('userTable');
+
+  // Adding event listener to filter results as user types
+  searchInput.addEventListener('input', function() {
+    const searchValue = searchInput.value.toLowerCase();
+    const rows = userTable.getElementsByTagName('tr');
+
+    // Loop through all table rows
+    for (let i = 0; i < rows.length; i++) {
+      const usernameCell = rows[i].querySelector('.user-username');
+      const fullnameCell = rows[i].querySelector('.user-fullname');
+      const emailCell = rows[i].querySelector('.user-email');
+
+      if (usernameCell || fullnameCell || emailCell) {
+        const usernameText = usernameCell.textContent.toLowerCase();
+        const fullnameText = fullnameCell.textContent.toLowerCase();
+        const emailText = emailCell.textContent.toLowerCase();
+
+        // Check if search value matches either username, fullname, or email
+        if (usernameText.includes(searchValue) || fullnameText.includes(searchValue) || emailText.includes(searchValue)) {
+          rows[i].style.display = '';  // Show the row
+        } else {
+          rows[i].style.display = 'none';  // Hide the row
+        }
+      }
+    }
+  });
+</script>
