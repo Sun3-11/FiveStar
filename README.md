@@ -4,6 +4,8 @@ This project is a Node.js application for displaying real estate listings. The a
 
 ## Gif
 
+![demo](https://github.com/Sun3-11/FiveStar/blob/master/readme/_FiveStar%20.gif)
+
 ## Image
 <div>
   <img src='https://github.com/user-attachments/assets/1b679ff8-ad44-4540-bbd5-c0d5ab8dcc31' high='300' width='300'>
