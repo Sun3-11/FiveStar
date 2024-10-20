@@ -2,10 +2,14 @@
 
 This project is a Node.js application for displaying real estate listings. The application uses MongoDB as the database, Mapbox for displaying interactive maps, and Cloudinary for handling image uploads. The app also utilizes a `.env` file for managing environment variables securely.
 
-##Gif
+## Gif
 
 ## Image
+<div>
+  <img src='https://github.com/user-attachments/assets/1b679ff8-ad44-4540-bbd5-c0d5ab8dcc31' high='300' width='300'>
+    <img src='https://github.com/user-attachments/assets/753208c8-ac66-413e-aa9c-f6173a9a288c' high='300' width='300'>
 
+</div>
 
 ## Features
 
