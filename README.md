@@ -46,11 +46,11 @@ Follow these steps to set up and run the project locally:
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/username/repo-name.git
+   git clone https://github.com/Sun3-11/FiveStar.git
 
 2. Navigate to the project directory:
    ```bash
-   cd repo-name
+   cd FiveStar
 3. Install dependencies: Use npm to install the required packages:
    ```bash
    npm install
